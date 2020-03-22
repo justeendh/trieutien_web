@@ -10,6 +10,7 @@
         'tuyendung' => 'RECRUITMENT',
         'news' => 'NEWS',
         'contact' => 'CONTACT' ,
+        'sendContact' => 'SEND US YOUR COMMENT' ,
         'ourPartner' =>'OUR PARTNER',
         'address' =>'Address',
         'phoneNumber' =>'Tel / Fax',
@@ -19,6 +20,8 @@
         'aboutTrieuTien' => 'About Trieu Tien JSC',
         'proNews' => 'PROFESSIONAL NEWS',
         'viewMore' => 'View more',
-        'proNewsOther' => 'See more news'
+        'proNewsOther' => 'See more news',
+
+        'contactIntro' => 'Please contact Trieu Tien using the information box below. We will respond to you as soon as possible. Sincere thanks for your suggestions!'
     );
 ?>

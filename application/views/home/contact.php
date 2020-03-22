@@ -1,4 +1,7 @@
-
+<?php
+	if(get_cookie("language") == "en") require 'lang-en.php';
+	else require 'lang-vi.php';
+?>
 
 
 <div class="map-ctn" style="position: relative; margin-top: 140px;">
@@ -14,14 +17,14 @@
 			<div class="col-xs-12 col-md-5">
 				<div class="newsitem-block" style="margin-top: 10px;">
 					<div class="pos-relative">
-						<h2 class="block-title text-secondary-font">LIÊN HỆ</h2>
+						<h2 class="block-title text-secondary-font"><?php echo $language_dict['contact'] ?></h2>
 						<div>
 							<h4 class="text-primary-font"><?php echo $infomations['companyfullname']; ?></h4>
 							<div>
-								<p><strong>Địa chỉ:</strong> <?php echo $infomations['fulladdress']; ?></p>
-								<p><strong>Điện thoại/Fax:</strong> <a href="tel:<?php echo $infomations['phone']; ?>"><?php echo $infomations['phone']; ?></a></p>
-								<p><strong>Hotline:</strong> <a href="tel:<?php echo $infomations['mobile']; ?>"><?php echo $infomations['mobile']; ?></a></p>
-								<p><strong>Email:</strong><a href="mailto:<?php echo $infomations['email']; ?>"><?php echo $infomations['email']; ?></a></p>
+								<p><strong><?php echo $language_dict['address'] ?>:</strong> <?php echo $infomations['fulladdress']; ?></p>
+								<p><strong><?php echo $language_dict['phoneNumber'] ?>:</strong> <a href="tel:<?php echo $infomations['phone']; ?>"><?php echo $infomations['phone']; ?></a></p>
+								<p><strong><?php echo $language_dict['hotline'] ?>:</strong> <a href="tel:<?php echo $infomations['mobile']; ?>"><?php echo $infomations['mobile']; ?></a></p>
+								<p><strong><?php echo $language_dict['emailAddress'] ?>:</strong><a href="mailto:<?php echo $infomations['email']; ?>"><?php echo $infomations['email']; ?></a></p>
 							</div>
 							<div class="hidden-sm hidden-xs" style="margin-top: 25px;">
 								<img src="img/logo.jpg" class="logo">
@@ -33,7 +36,7 @@
 			<div class="col-xs-12 col-md-7">
 				<div class="newsitem-block" style="margin-top: 10px;">
 					<div class="pos-relative">
-						<h2 class="block-title text-secondary-font">GỬI GÓP Ý CHO CHÚNG TÔI</h2>
+						<h2 class="block-title text-secondary-font"><?php echo $language_dict['sendContact'] ?></h2>
 						<div>
 							<div>
 								<?php echo $infomations['contactformintro']; ?>
