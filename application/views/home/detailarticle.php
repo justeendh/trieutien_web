@@ -1,4 +1,7 @@
-
+<?php 
+	if(get_cookie("language") == "en") { require 'lang-en.php'; $langQuery = 'En-US'; }
+	else { require 'lang-vi.php'; $langQuery = 'Vi-VN'; }
+?>
 
 <section class="content-section">
 	<div class="newsitem-block">
@@ -34,10 +37,10 @@
 					<ul class="categories-lst">
 							<li class="headlist">
 								<i class="fa fa-list"></i>&nbsp;&nbsp;
-								<span>Danh mục bài viết</span>
+								<span><?php echo $language_dict['categories'] ?></span>
 							</li>
 							<?php 
-								$queryArticlesMd = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='".$moduleID."' AND VISIBLE_AR = 1 ORDER BY SORT_INDEX, DATE_MODIFIED DESC, DATE_CREATED DESC ");
+								$queryArticlesMd = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='".$moduleID."' AND LANGUAGE = '".$langQuery."' AND VISIBLE_AR = 1 ORDER BY SORT_INDEX, DATE_MODIFIED DESC, DATE_CREATED DESC ");
 								foreach ($queryArticlesMd->result() as $row)
 								{
 							?>
@@ -51,8 +54,8 @@
 							<?php if($moduleID == "gioithieu") { ?>
 								<li>
 									<a href="articles-detail-image-flb/ho-so-nang-luc.html"
-									 title="Hồ sơ năng lực">
-										Hồ sơ năng lực
+									 title="<?php echo $language_dict['companyProfile'] ?>">
+									 	<?php echo $language_dict['companyProfile'] ?>
 									</a>
 								</li>
 							<?php } ?>
@@ -63,7 +66,7 @@
 						<ul class="categories-lst" style="margin-bottom: 0;">
 							<li class="headlist">
 								<i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;
-								<span>Dự án gần đây</span>
+								<span><?php echo $language_dict['nearProjects'] ?></span>
 							</li>
 						</ul>
 						<div class="newslisst" style="background-color: #f3f3f3 !important;">
@@ -102,7 +105,7 @@
 						<ul class="categories-lst" style="margin-bottom: 0;">
 							<li class="headlist">
 								<i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;
-								<span>Tin tức chuyên ngành</span>
+								<span><?php echo $language_dict['proNewsLow'] ?></span>
 							</li>
 						</ul>
 						<div class="newslisst" style="background-color: #f3f3f3 !important;">

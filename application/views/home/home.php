@@ -1,6 +1,6 @@
 <?php
-	if(get_cookie("language") == "en") require 'lang-en.php';
-	else require 'lang-vi.php';
+	if(get_cookie("language") == "en") { require 'lang-en.php'; $langQuery = 'En-US'; }
+	else { require 'lang-vi.php'; $langQuery = 'Vi-VN'; }
 ?>
 
 <link rel="stylesheet" href="css/jquery.bxslider.css">
@@ -51,7 +51,7 @@
 	<div class="container">
 		<div class="row">
 			<?php 
-				$queryService = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='dichvucongty' AND VISIBLE_AR = 1 ORDER BY SORT_INDEX");
+				$queryService = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='dichvucongty' AND LANGUAGE = '".$langQuery."' AND VISIBLE_AR = 1 ORDER BY SORT_INDEX");
 				foreach ($queryService->result() as $row)
 				{
 			?>
@@ -77,7 +77,7 @@
 
 
 <?php 
-	$queryDuAn = $this->db->query("SELECT * FROM hd_groups where ID_MODULE ='duan' and VISIBLE_GR = 1 ORDER BY SORT_INDEX");
+	$queryDuAn = $this->db->query("SELECT * FROM hd_groups where ID_MODULE ='duan' AND LANGUAGE = '".$langQuery."' and VISIBLE_GR = 1 ORDER BY SORT_INDEX");
 	foreach ($queryDuAn->result() as $row)
 	{
 		$queryProjects = $this->db->query("SELECT * FROM hd_projects 

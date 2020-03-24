@@ -1,3 +1,8 @@
+<?php 
+	if(get_cookie("language") == "en") { require 'lang-en.php'; $langQuery = 'En-US'; }
+	else { require 'lang-vi.php'; $langQuery = 'Vi-VN'; }
+?>
+
 <style>
 	.newsitem-block .list-news-block .construc-item .project-info-wrap .mota_project ul li {
 		font-size: 13px;
@@ -24,7 +29,7 @@
 
 <section  class="content-section">
 	<div class="listproject newsitem-block">
-		<div class="container pos-relative">
+		<div class="container pos-relative" style="min-height: calc(100vh - 470px);">
 			<h2 class="block-title text-secondary-font"><?php echo $module ?></h2>
 			<div style="margin-bottom: 15px;">
 				<?php 
@@ -40,7 +45,7 @@
 					<a class="image-link" href="detail-project/du-an/<?php echo friendlyName($row->NAME_PRJ); ?>-viewpost-<?php echo $row->ID_PRJ ?>.html" title="<?php echo $row->NAME_PRJ ?>">
 						<img class="img-c-two2" src="thumbnail/img?imageurl=<?php echo default_value($row->IMAGE_PRJ, 'img/no-image.jpg'); ?>&width=500" alt="<?php echo $row->NAME_PRJ ?>">
 						<div class="fdw-background2">
-							<div class="detail-btn">Xem chi tiết</div>
+							<div class="detail-btn"><?php echo $language_dict['viewDetail'] ?></div>
 						</div>
 					</a>				
 					<div class="project-info-wrap">
@@ -51,9 +56,9 @@
 						</a>
 						<div class="mota_project">
 							<ul>
-								<li><strong><i class="fa fa-user-secret"></i>Chủ đầu tư: </strong><?php echo $row->HOST_PRJ ?></li>
-								<li><strong><i class="fa fa-map-marker"></i>Địa điểm thi công:</strong>&nbsp;<?php echo $row->LOCATION_PRJ ?></li>
-								<li><strong><i class="fa fa-calendar"></i>Thời gian thi công:</strong> <?php echo $row->YEAR_PRJ ?></li>
+								<li><strong><i class="fa fa-user-secret"></i><?php echo $language_dict['investor'] ?>: </strong><?php echo $row->HOST_PRJ ?></li>
+								<li><strong><i class="fa fa-map-marker"></i><?php echo $language_dict['constructionSite'] ?>:</strong>&nbsp;<?php echo $row->LOCATION_PRJ ?></li>
+								<li><strong><i class="fa fa-calendar"></i><?php echo $language_dict['constructionTime'] ?>:</strong> <?php echo $row->YEAR_PRJ ?></li>
 							</ul>
 						</div>
 					</div>
@@ -88,7 +93,7 @@
 			<?php  } else{ ?> 
 				<div class="text-center no-data">
 					<div><i class="fa fa-4x fa-frown-o"></i></div>
-					<h4>Không có dữ liệu hiển thị</h4>
+					<h4><?php echo $language_dict['no_data'] ?></h4>
 				</div>
 			<?php } ?>
 			

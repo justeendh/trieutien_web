@@ -1,4 +1,7 @@
-
+<?php 
+	if(get_cookie("language") == "en") { require 'lang-en.php'; $langQuery = 'En-US'; }
+	else { require 'lang-vi.php'; $langQuery = 'Vi-VN'; }
+?>
 <style>
 	.project-highlight .highlight-project-info > h4 {
 		padding: 15px 20px 0;
@@ -18,7 +21,7 @@
 
 <section  class="content-section">
 	<div class="newsitem-block project-highlight">
-		<div class="container pos-relative">
+		<div class="container pos-relative" style="min-height: calc(100vh - 470px);">
 			<h2 class="block-title text-secondary-font"><?php echo $module ?></h2>
 			<div style="margin-bottom: 15px;">
 				<?php 
@@ -77,7 +80,7 @@
 					?> 
 						<div class="text-center no-data">
 							<div><i class="fa fa-4x fa-frown-o"></i></div>
-							<h4>Không có dữ liệu hiển thị</h4>
+							<h4><?php echo $language_dict['no_data'] ?></h4>
 						</div>
 					<?php
 				}

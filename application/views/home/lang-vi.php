@@ -1,5 +1,6 @@
 <?php 
     $language_dict = array(
+        'no_data' => 'Không có dữ liệu hiển thị',
         'companyName1'   => 'CÔNG TY CỔ PHẦN XÂY DỰNG',
         'companyName2'  => 'TRIỀU TIẾN',
         'homePage'  => 'TRANG CHỦ',
@@ -19,10 +20,18 @@
         'visitCount' =>'Tổng lượt truy cập',
         'aboutTrieuTien' => 'Về công ty Triều Tiến',
         'proNews' => 'TIN TỨC CHUYÊN NGÀNH',
+        'proNewsLow' => 'Tin tức chuyên ngành',
         'viewMore' => 'Xem thêm',
+        'viewDetail' => 'Xem chi tiết',
         'proNewsOther' => 'Xem thêm các tin khác',
 
-        'contactIntro' => 'Quý vị vui lòng liên hệ với Triều Tiến theo khung thông tin dưới đây. Chúng tôi sẽ phản hồi với quý vị sớm nhất có thể. Xin chân thành cảm ơn sự góp ý của quý vị!'
+        'contactIntro' => 'Quý vị vui lòng liên hệ với Triều Tiến theo khung thông tin dưới đây. Chúng tôi sẽ phản hồi với quý vị sớm nhất có thể. Xin chân thành cảm ơn sự góp ý của quý vị!',
+        'categories' => 'Danh mục bài viết',
+        'nearProjects' => 'Dự án gần đây',
+
+        'investor' => 'Chủ đầu tư',
+        'constructionSite' => 'Địa điểm thi công',
+        'constructionTime' => 'Thời gian thin công'
     );
 
 ?>

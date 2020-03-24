@@ -1,7 +1,11 @@
 <?php
 	defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
+	
+	if(get_cookie("language") == "en") { require 'lang-en.php'; $langQuery = 'En-US'; }
+	else { require 'lang-vi.php'; $langQuery = 'Vi-VN'; }
+
 	$infomations=array();
-	$query = $this->db->query("SELECT KEY_INFO, VAL_INFO FROM hd_infomations");
+	$query = $this->db->query("SELECT KEY_INFO, VAL_INFO FROM hd_infomations WHERE LANGUAGE = '".$langQuery."'");
 	foreach ($query->result() as $row)
 	{
 		$infomations[$row->KEY_INFO] = $row->VAL_INFO;
@@ -15,8 +19,6 @@
 	$ogDesc = isset($og_Desc) && $og_Desc != "" ? $og_Desc : $infomations['companyfullname']."Địa chỉ: ".$infomations['fulladdress'];
 	$ogImageUrl = isset($og_Image) ? $protocol."://".$_SERVER['SERVER_NAME'].base_url().$og_Image : $protocol."://".$_SERVER['SERVER_NAME'].base_url()."img/logo.jpg";
 	
-	if(get_cookie("language") == "en") require 'lang-en.php';
-	else require 'lang-vi.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,7 +60,7 @@
 	  var js, fjs = d.getElementsByTagName(s)[0];
 	  if (d.getElementById(id)) return;
 	  js = d.createElement(s); js.id = id;
-	  js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1';
+	  js.src = 'https://connect.facebook.net/<?php echo ($langQuery == 'Vi-VN' ? 'vi_VN' : 'en_US'); ?>>/sdk.js#xfbml=1&version=v3.1';
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 	
@@ -139,7 +141,7 @@
 										<div class="submenu-ctn">
 											<ul>
 												<?php 
-													$query = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='gioithieu' and VISIBLE_AR = 1 ORDER BY SORT_INDEX");
+													$query = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='gioithieu' AND LANGUAGE = '".$langQuery."' and VISIBLE_AR = 1 ORDER BY SORT_INDEX");
 													foreach ($query->result() as $row)
 													{
 													?>
@@ -167,7 +169,7 @@
 										<div class="submenu-ctn">
 											<ul>
 												<?php 
-													$queryDuAn = $this->db->query("SELECT * FROM hd_groups where ID_MODULE ='duan' and VISIBLE_GR = 1 ORDER BY SORT_INDEX");
+													$queryDuAn = $this->db->query("SELECT * FROM hd_groups where ID_MODULE ='duan' AND LANGUAGE = '".$langQuery."' and VISIBLE_GR = 1 ORDER BY SORT_INDEX");
 													foreach ($queryDuAn->result() as $row)
 													{
 													?>

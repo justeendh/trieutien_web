@@ -11,11 +11,6 @@ class Home extends CI_Controller {
 		$this->load->database();
 		$this->load->library('user_agent');
 		$this->load->helper('counter');
-		
-		$querysiteActive = $this->db->query("SELECT KEY_INFO, VAL_INFO FROM hd_infomations WHERE KEY_INFO = 'stopwebsite'");
-	    if($querysiteActive->row()->VAL_INFO == "0" && $this->router->fetch_method() != "stopsite") {
-			 redirect('page/stopsite', 'location');
-		} 
 
 		if($this->input->cookie('language') == null || $this->input->cookie('language') == ''){			
 			$cookie = array(
@@ -26,6 +21,11 @@ class Home extends CI_Controller {
 			);
 			$this->input->set_cookie($cookie);
 		}
+		
+		$querysiteActive = $this->db->query("SELECT KEY_INFO, VAL_INFO FROM hd_infomations WHERE KEY_INFO = 'stopwebsite'");
+	    if($querysiteActive->row()->VAL_INFO == "0" && $this->router->fetch_method() != "stopsite") {
+			 redirect('page/stopsite', 'location');
+		} 
 	}
 
 	public function changelang($language){	
@@ -85,6 +85,10 @@ class Home extends CI_Controller {
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");
 		$queryArticles = $this->db->query("SELECT * FROM hd_articles WHERE ID_MODULE = '.$module.'");
 		$resultData = $queryArticles->result();
+
+		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
+		else { $data['module'] = $queryModule->row()->Vi_VN; }
+
 		if($queryModule->row()->TYPE_MD == '0'){
 			$queryArticle = $this->db->query("SELECT * FROM hd_articles WHERE ID_MODULE ='".$module."' ORDER BY SORT_INDEX LIMIT 1");
 			$data = array('content'=>'home/detailarticle');	
@@ -111,11 +115,11 @@ class Home extends CI_Controller {
 			$data['viewData'] = array('TOTAL_REC' => $queryCount->row()->TOTAL_REC);
 			$data["contentModel"] = $queryListArticle->result();
 			
-			$data['og_Title'] = $queryModule->row()->NAME_MD;
-			$data['og_Desc'] = $queryModule->row()->NAME_MD;
+			$data['og_Title'] = $data['module'];
+			$data['og_Desc'] = $data['module'];
 		}	
-		$data['module'] = $queryModule->row()->NAME_MD;
-		$data['moduleName'] = $queryModule->row()->NAME_MD;
+		//$data['module'] = $queryModule->row()->NAME_MD;
+		$data['moduleName'] = $data['module'];
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
 		$data['moduleType'] = $queryModule->row()->TYPE_MD;
 		$this->load->view('home/master_view', $data);
@@ -126,8 +130,12 @@ class Home extends CI_Controller {
 		$data = array('content'=>'home/detailarticle');
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");	
 		$queryArticle = $this->db->query("SELECT * FROM hd_articles WHERE ID_AR ='".$id."' LIMIT 1");	
-		$data['module'] = $queryModule->row()->NAME_MD;
-		$data['moduleName'] = $queryModule->row()->NAME_MD;
+
+		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
+		else { $data['module'] = $queryModule->row()->Vi_VN; }
+
+		//$data['module'] = $queryModule->row()->NAME_MD;
+		$data['moduleName'] = $data['module']; //$queryModule->row()->NAME_MD;
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
 		$data['moduleType'] = $queryModule->row()->TYPE_MD;
 		$data['articleModel'] = $queryArticle->row();
@@ -155,16 +163,20 @@ class Home extends CI_Controller {
 					WHERE ID_MODULE ='hinhanh' AND VISIBLE_IMG = 1 ORDER BY SORT_INDEX, DATE_MODIFIED DESC, DATE_CREATED DESC 
 					LIMIT ".$offsetSelect." ,".$limitrec);
 							
-		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");	
-		$data['module'] = $queryModule->row()->NAME_MD;
-		$data['moduleName'] = $queryModule->row()->NAME_MD;
+		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");			
+
+		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
+		else { $data['module'] = $queryModule->row()->Vi_VN; }
+
+		//$data['module'] = $queryModule->row()->NAME_MD;
+		$data['moduleName'] = $data['module'];
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
 		$data['moduleType'] = $queryModule->row()->TYPE_MD;
 		$data["queryImageActivity"] = $queryImageActivity; 		
 		
 		
-		$data['og_Title'] = $queryModule->row()->NAME_MD;
-		$data['og_Desc'] = $queryModule->row()->NAME_MD;
+		$data['og_Title'] = $data['module'];
+		$data['og_Desc'] = $data['module'];
 		
 		$this->load->view('home/master_view', $data);
 	}
@@ -175,8 +187,13 @@ class Home extends CI_Controller {
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");	
 		$queryImageModel = $this->db->query("SELECT * FROM hd_images WHERE ID = ".$id." LIMIT 1");
 		$queryImageListModel = $this->db->query("SELECT * FROM hd_images WHERE ID_MODULE ='".$module."_ref_".$id."' AND REF_ID = ".$id." ");
-		$data['module'] = $queryModule->row()->NAME_MD;
-		$data['moduleName'] = $queryModule->row()->NAME_MD;
+					
+
+		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
+		else { $data['module'] = $queryModule->row()->Vi_VN; }
+
+		//$data['module'] = $queryModule->row()->NAME_MD;
+		$data['moduleName'] = $data['module'];
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
 		$data['moduleType'] = $queryModule->row()->TYPE_MD;
 		$data['queryImageModel'] = $queryImageModel->row();
@@ -195,15 +212,20 @@ class Home extends CI_Controller {
 		$data = array('content'=>'home/detailimageflb');
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");	
 		$queryImageListModel = $this->db->query("SELECT * FROM hd_images WHERE ID_MODULE ='".$module."' AND VISIBLE_IMG = 1 ");
-		$data['module'] = $queryModule->row()->NAME_MD;
-		$data['moduleName'] = $queryModule->row()->NAME_MD;
+
+		
+		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
+		else { $data['module'] = $queryModule->row()->Vi_VN; }
+
+		//$data['module'] = $queryModule->row()->NAME_MD;
+		$data['moduleName'] = $data['module'];
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
 		$data['moduleType'] = $queryModule->row()->TYPE_MD;
 		$data['queryImageListModel'] = $queryImageListModel->result();
 		
 		
-		$data['og_Title'] = $queryModule->row()->NAME_MD;
-		$data['og_Desc'] = $queryModule->row()->NAME_MD;
+		$data['og_Title'] = $data['module'];
+		$data['og_Desc'] = $data['module'];
 		
 		$this->load->view('home/master_view', $data);
 	}
@@ -221,15 +243,18 @@ class Home extends CI_Controller {
 		
 		
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");	
+		
+		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
+		else { $data['module'] = $queryModule->row()->Vi_VN; }
 			
-		$data['module'] = $queryModule->row()->NAME_MD;
-		$data['moduleName'] = $queryModule->row()->NAME_MD;
+		//$data['module'] = $queryModule->row()->NAME_MD;
+		$data['moduleName'] = $data['module'];
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
 		$data['moduleType'] = $queryModule->row()->TYPE_MD;
 		
 		if($id != -1){
 			$queryGroupName = $this->db->query("SELECT NAME_GR FROM hd_groups WHERE ID_GR ='".$id."' LIMIT 1");
-			$data['module'] = $queryModule->row()->NAME_MD." - ".$queryGroupName->row()->NAME_GR;
+			$data['module'] = $data['module']." - ".$queryGroupName->row()->NAME_GR;
 			
 			$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_projects WHERE ID_MODULE ='duan' AND GROUP_ID = ".$id." AND VISIBLE_PRJ = 1 ");		
 			$data['viewData'] = array('TOTAL_REC' => $queryCount->row()->TOTAL_REC);
@@ -240,7 +265,7 @@ class Home extends CI_Controller {
 			
 			
 			$data['og_Title'] = $queryGroupName->row()->NAME_GR;
-			$data['og_Desc'] = $queryModule->row()->NAME_MD;
+			$data['og_Desc'] = $data['module'];
 		}
 		else{	
 			
@@ -252,8 +277,8 @@ class Home extends CI_Controller {
 			$data["queryProjects"] = $queryProjects->result();
 			
 			
-			$data['og_Title'] = $queryModule->row()->NAME_MD;
-			$data['og_Desc'] = $queryModule->row()->NAME_MD;
+			$data['og_Title'] = $data['module'];
+			$data['og_Desc'] = $data['module'];
 		}
 		
 		
@@ -267,15 +292,20 @@ class Home extends CI_Controller {
 		$data = array('content'=>'home/detailproject');
 		$queryProject = $this->db->query("SELECT * FROM hd_projects WHERE ID_PRJ ='".$id."' LIMIT 1");
 		$queryImageListModel = $this->db->query("SELECT * FROM hd_images WHERE ID_MODULE ='".$module."_ref_".$id."' AND REF_ID = ".$id." ");
-		$data['module'] = $queryModule->row()->NAME_MD;
-		$data['moduleName'] = $queryModule->row()->NAME_MD;
+
+		
+		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
+		else { $data['module'] = $queryModule->row()->Vi_VN; }
+
+		//$data['module'] = $queryModule->row()->NAME_MD;
+		$data['moduleName'] = $data['module'];
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
 		$data['moduleType'] = $queryModule->row()->TYPE_MD;
 		$data['modelProject'] = $queryProject->row();
 		$data['queryImageListModel'] = $queryImageListModel->result();
 		
 		$data['og_Title'] = $queryProject->row()->NAME_PRJ;
-		$data['og_Desc'] = $queryProject->row()->LOCATION_PRJ." - Chủ đầu tư: ".$queryProject->row()->LOCATION_PRJ." - Khởi công: "
+		$data['og_Desc'] = $queryProject->row()->LOCATION_PRJ." - ".$queryProject->row()->LOCATION_PRJ." - "
 			.$queryProject->row()->YEAR_PRJ." - ".$queryProject->row()->NAME_PRJ;
 		$data['og_Image'] = $queryProject->row()->IMAGE_PRJ;
 		
