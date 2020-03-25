@@ -95,7 +95,7 @@
 							title="<?php echo $rowPrj->NAME_PRJ ?>">
 							<img class="img-c-two2" src="thumbnail/img?imageurl=<?php echo default_value($rowPrj->IMAGE_PRJ, 'img/no-image.jpg'); ?>&width=500" alt="<?php echo $rowPrj->NAME_PRJ ?>">
 							<div class="fdw-background2">
-								<div class="detail-btn">Xem chi tiết</div>
+								<div class="detail-btn"><?php echo $language_dict['viewDetail'] ?></div>
 							</div>
 						</a>				
 						<div class="project-info-wrap">
@@ -107,9 +107,9 @@
 							</a>
 							<div class="mota_project">
 								<ul>
-									<li><strong><i class="fa fa-user-secret"></i>Chủ đầu tư: </strong><?php echo $rowPrj->HOST_PRJ ?></li>
-									<li><strong><i class="fa fa-map-marker"></i>Địa điểm thi công:</strong>&nbsp;<?php echo $rowPrj->LOCATION_PRJ ?></li>
-									<li><strong><i class="fa fa-calendar"></i>Thời gian thi công:</strong> <?php echo $rowPrj->YEAR_PRJ ?></li>
+									<li><strong><i class="fa fa-user-secret"></i><?php echo $language_dict['investor'] ?>: </strong><?php echo $rowPrj->HOST_PRJ ?></li>
+									<li><strong><i class="fa fa-map-marker"></i><?php echo $language_dict['constructionSite'] ?>:</strong>&nbsp;<?php echo $rowPrj->LOCATION_PRJ ?></li>
+									<li><strong><i class="fa fa-calendar"></i><?php echo $language_dict['constructionTime'] ?>:</strong> <?php echo $rowPrj->YEAR_PRJ ?></li>
 								</ul>
 							</div>
 						</div>

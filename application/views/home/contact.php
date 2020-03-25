@@ -50,7 +50,7 @@
 										?>
 										<div class="alert alert-success alert-dismissable">
 											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-											<h4><i class="fa fa-check-circle"></i> Thành công</h4>
+											<h4><i class="fa fa-check-circle"></i> Success</h4>
 											<div>
 												<?php echo $viewData["Success"]; ?>
 											</div>
@@ -63,7 +63,7 @@
 									?>
 										<div class="alert alert-danger alert-dismissable">
 											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-											<h4><i class="fa fa-check-circle"></i> Lỗi</h4>
+											<h4><i class="fa fa-check-circle"></i> Error</h4>
 											<div>
 												<?php echo $viewData["Failed"]; ?>
 											</div>
@@ -77,7 +77,7 @@
 												<tr>
 													<td style="width: 1%; white-space: nowrap;" class="text-nowrap">
 														<div class="label-wrapper">
-															<label for="TITLE_CONTACT">Tiêu đề <span class="text-danger">*</span></label>
+															<label for="TITLE_CONTACT"><?php echo $language_dict["contactTitle"]; ?> <span class="text-danger">*</span></label>
 														</div>
 													</td>
 													<td>
@@ -89,14 +89,14 @@
 												<tr>
 													<td style="width: 1%; white-space: nowrap;" class="text-nowrap">
 														<div class="label-wrapper">
-															<label for="CONTENT_CONTACT">Nội dung <span class="text-danger">*</span></label>                            
+															<label for="CONTENT_CONTACT"><?php echo $language_dict["contactContent"]; ?> <span class="text-danger">*</span></label>                            
 														</div>
 													</td>
 													<td>
 														<div class="input-wrapper">
 															<input id="STATUS_CONTACT" name="STATUS_CONTACT" type="hidden" value="0">
 															<input id="IS_REPLY" name="IS_REPLY" type="hidden" value="False">
-															<textarea autocomplete="off" class="textarea message" cols="20" id="CONTENT_CONTACT" name="CONTENT_CONTACT" placeholder="Xin quý khách vui lòng mô tả chi tiết" rows="2"><?php echo $this->input->post("CONTENT_CONTACT"); ?></textarea>
+															<textarea autocomplete="off" class="textarea message" cols="20" id="CONTENT_CONTACT" name="CONTENT_CONTACT" placeholder="<?php echo $language_dict["contactContentPlaceHolder"]; ?>" rows="2"><?php echo $this->input->post("CONTENT_CONTACT"); ?></textarea>
 
 														</div>
 													</td>
@@ -104,7 +104,7 @@
 												<tr>
 													<td style="width: 1%; white-space: nowrap;" class="text-nowrap">
 														<div class="label-wrapper">
-															<label for="NAME_CONTACT">Tên của bạn <span class="text-danger">*</span></label>
+															<label for="NAME_CONTACT"><?php echo $language_dict["contactName"]; ?> <span class="text-danger">*</span></label>
 														</div>
 													</td>
 													<td>
@@ -116,7 +116,7 @@
 												<tr>
 													<td style="width: 1%; white-space: nowrap;" class="text-nowrap">
 														<div class="label-wrapper">
-															<label for="EMAIL_CONTACT">Email <span class="text-danger">*</span></label>
+															<label for="EMAIL_CONTACT"><?php echo $language_dict["contactEmail"]; ?> <span class="text-danger">*</span></label>
 														</div>
 													</td>
 													<td>
@@ -128,7 +128,7 @@
 												<tr>
 													<td style="width: 1%; white-space: nowrap;" class="text-nowrap">
 														<div class="label-wrapper">
-															<label for="PHONE_CONTACT">Số điện thoại <span class="text-danger">*</span></label>
+															<label for="PHONE_CONTACT"><?php echo $language_dict["contactPhone"]; ?> <span class="text-danger">*</span></label>
 														</div>
 													</td>
 													<td>
@@ -148,7 +148,7 @@
 												<tr>
 													<td style="width: 1%; white-space: nowrap;" class="text-nowrap">
 														<div class="label-wrapper">
-															<label for="title">Mã bảo mật <span class="text-danger">*</span></label>
+															<label for="title"><?php echo $language_dict["contactSecurityCode"]; ?> <span class="text-danger">*</span></label>
 														</div>
 													</td>
 													<td>
@@ -162,7 +162,7 @@
 													<td style="white-space: nowrap;" class="text-nowrap">
 														<div class="submit-wrapper">
 															<button type="submit" name="submit" class="btn btn-lg text-primary-font" style="background-color: #c12f32; color: #fff;">
-																<i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;Gửi Liên Hệ
+																<i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;<?php echo $language_dict["contactSendBtn"]; ?>
 															</button>
 														</div>
 													</td>

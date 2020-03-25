@@ -31,6 +31,17 @@
 
         'investor' => 'Investor',
         'constructionSite' => 'Construction site',
-        'constructionTime' => 'Construction time'
+        'constructionTime' => 'Construction time',
+
+        'contactSuccess' => 'Your request has been sent successfully!',
+        'contactError' => 'An error has occurred. Please try again or contact us directly. Thank you !',
+        'contactTitle' => 'Title',
+        'contactContent' => 'Content',
+        'contactContentPlaceHolder' => 'Please describe in detail',
+        'contactName' => 'Your name',
+        'contactEmail' => 'Email address',
+        'contactPhone' => 'Phone number',
+        'contactSecurityCode' => 'Security code',
+        'contactSendBtn' => 'Send contact'
     );
 ?>

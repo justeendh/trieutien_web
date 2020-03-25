@@ -86,11 +86,11 @@ class Home extends CI_Controller {
 		$queryArticles = $this->db->query("SELECT * FROM hd_articles WHERE ID_MODULE = '.$module.'");
 		$resultData = $queryArticles->result();
 
-		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
-		else { $data['module'] = $queryModule->row()->Vi_VN; }
+		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; $langQuery = 'En-US';}
+		else { $data['module'] = $queryModule->row()->Vi_VN; $langQuery = 'Vi-VN';}
 
 		if($queryModule->row()->TYPE_MD == '0'){
-			$queryArticle = $this->db->query("SELECT * FROM hd_articles WHERE ID_MODULE ='".$module."' ORDER BY SORT_INDEX LIMIT 1");
+			$queryArticle = $this->db->query("SELECT * FROM hd_articles WHERE ID_MODULE ='".$module."' AND LANGUAGE = '".$langQuery."'  ORDER BY SORT_INDEX LIMIT 1");
 			$data = array('content'=>'home/detailarticle');	
 			$data['articleModel'] = $queryArticle->row();
 			
@@ -119,6 +119,8 @@ class Home extends CI_Controller {
 			$data['og_Desc'] = $data['module'];
 		}	
 		//$data['module'] = $queryModule->row()->NAME_MD;
+		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
+		else { $data['module'] = $queryModule->row()->Vi_VN; }
 		$data['moduleName'] = $data['module'];
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
 		$data['moduleType'] = $queryModule->row()->TYPE_MD;
@@ -338,7 +340,24 @@ class Home extends CI_Controller {
 	public function contact()
 	{
 		$this->load->helper('captcha');
-		
+		if(get_cookie("language") == "en") { 
+			$data['module'] = "Contact";
+			$language_dict = array(
+				'contactFormMissingField' => 'Please complete the information',
+				'contactInvaliSecurityCode' => 'The security code is incorrect',
+				'contactSuccess' => 'Your request has been sent successfully!',
+        		'contactError' => 'An error has occurred. Please try again or contact us directly. Thank you !'
+			);	
+		}
+		else { 
+			$data['module'] = "Liên hệ";
+			$language_dict = array(
+				'contactFormMissingField' => 'Vui lòng điền đầy đủ các thông tin',
+				'contactInvaliSecurityCode' => 'Mã bảo mật không đúng',
+				'contactSuccess' => 'Yêu cầu của bạn đã được gửi thành công !',
+				'contactError' => 'Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng tôi. Xin cảm ơn'
+			);			
+		}
 		$data['module'] = "Liên hệ";
 		$data = array('content'=>'home/contact');
 		if(!isset($_POST["submit"])){
@@ -357,7 +376,7 @@ class Home extends CI_Controller {
 			if($TITLE_CONTACT == "" || $CONTENT_CONTACT == "" || $NAME_CONTACT == ""
 			   || $EMAIL_CONTACT == "" || $PHONE_CONTACT == "" || $captchaCodeInput == ""){
 				
-				$data["viewData"] = array("Failed" => "<p>Vui lòng điền đầy đủ các thông tin</p>");
+				$data["viewData"] = array("Failed" => "<p>".$language_dict['contactFormMissingField']."</p>");
 				$this->load->view('home/master_view', $data);
 			}
 			else{				
@@ -368,12 +387,12 @@ class Home extends CI_Controller {
 					 VALUES ('".$NAME_CONTACT."', '".$EMAIL_CONTACT."', '".$PHONE_CONTACT."', '".$TITLE_CONTACT."', '".$CONTENT_CONTACT."', '0', '".date('Y-m-d H:i:s')."', NULL)");
 					if($this->db->affected_rows() > 0){
 						unset ($_POST);
-						$data["viewData"] = array("Success" => "<p>Gửi liên hệ thành công !</p>");
+						$data["viewData"] = array("Success" => "<p>".$language_dict['contactSuccess']."</p>");
 					}
-					else $data["viewData"] = array("Failed" => "<p>Đã có lỗi xảy ra khi gửi liên hệ. Vui lòng kiểm tra và thử lại.</p>");
+					else $data["viewData"] = array("Failed" => "<p>".$language_dict['contactError']."</p>");
 				} 
 				else {
-					$data["viewData"] = array("Failed" => "<p>Mã bảo mật không đúng</p>");
+					$data["viewData"] = array("Failed" => "<p>".$language_dict['contactInvaliSecurityCode']."</p>");
 				}
 				$this->load->view('home/master_view', $data);
 			}
