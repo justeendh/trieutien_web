@@ -111,7 +111,9 @@ class Home extends CI_Controller {
 			$queryListArticle = $this->db->query("SELECT * FROM hd_articles 
 					WHERE ID_MODULE ='".$module."' AND VISIBLE_AR = 1 ORDER BY SORT_INDEX, DATE_MODIFIED DESC, DATE_CREATED DESC 
 					LIMIT ".$offsetSelect." ,".$limitrec);
-			
+			if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; $langQuery = 'En-US';}
+			else { $data['module'] = $queryModule->row()->Vi_VN; $langQuery = 'Vi-VN';}
+	
 			$data['viewData'] = array('TOTAL_REC' => $queryCount->row()->TOTAL_REC);
 			$data["contentModel"] = $queryListArticle->result();
 			
