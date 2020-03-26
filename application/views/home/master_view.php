@@ -189,7 +189,7 @@
 								</li>
 								<li>
 									<?php 
-									$querytuyendung = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='tuyendung' and VISIBLE_AR = 1 ORDER BY DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 1");
+									$querytuyendung = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='tuyendung'  AND LANGUAGE = '".$langQuery."'  and VISIBLE_AR = 1 ORDER BY DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 1");
 									
 									?>
 									<a href="detail-article/tuyen-dung/tuyen-dung-viewpost-<?php echo $querytuyendung->row()->ID_AR; ?>.html">

@@ -72,7 +72,7 @@
 						<div class="newslisst" style="background-color: #f3f3f3 !important;">
 							<ul style="list-style: none; padding: 0; margin: 0; padding-top: 0px;">
 								<?php 
-									$queryProject = $this->db->query("SELECT * FROM hd_projects where ID_MODULE ='duan' AND VISIBLE_PRJ = 1 ORDER BY DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 8 ");
+									$queryProject = $this->db->query("SELECT * FROM hd_projects where ID_MODULE ='duan'  AND LANGUAGE = '".$langQuery."'  AND VISIBLE_PRJ = 1 ORDER BY DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 8 ");
 									foreach ($queryProject->result() as $row)
 									{
 								?>
@@ -111,7 +111,7 @@
 						<div class="newslisst" style="background-color: #f3f3f3 !important;">
 							<ul style="list-style: none; padding: 0; margin: 0; padding-top: 0px;">
 								<?php 
-									$queryNews = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='tintuc' AND ID_AR != ".$articleModel->ID_AR." AND VISIBLE_AR = 1 ORDER BY rand(), DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 10 ");
+									$queryNews = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='tintuc'  AND LANGUAGE = '".$langQuery."'  AND ID_AR != ".$articleModel->ID_AR." AND VISIBLE_AR = 1 ORDER BY rand(), DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 10 ");
 									foreach ($queryNews->result() as $row)
 									{
 								?>

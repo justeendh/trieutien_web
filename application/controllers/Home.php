@@ -82,12 +82,14 @@ class Home extends CI_Controller {
 	
 	public function listarticles($module)
 	{
+
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");
-		$queryArticles = $this->db->query("SELECT * FROM hd_articles WHERE ID_MODULE = '.$module.'");
-		$resultData = $queryArticles->result();
 
 		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; $langQuery = 'En-US';}
 		else { $data['module'] = $queryModule->row()->Vi_VN; $langQuery = 'Vi-VN';}
+
+		$queryArticles = $this->db->query("SELECT * FROM hd_articles WHERE ID_MODULE = '.$module.' AND LANGUAGE = '".$langQuery."' ");
+		$resultData = $queryArticles->result();
 
 		if($queryModule->row()->TYPE_MD == '0'){
 			$queryArticle = $this->db->query("SELECT * FROM hd_articles WHERE ID_MODULE ='".$module."' AND LANGUAGE = '".$langQuery."'  ORDER BY SORT_INDEX LIMIT 1");
@@ -107,9 +109,9 @@ class Home extends CI_Controller {
 			$per_page = $this->input->get("per_page");
 			if(!isset($per_page) || $per_page == null) $per_page = 1;
 			$offsetSelect = ($per_page-1)*$limitrec;
-			$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_articles WHERE ID_MODULE ='".$module."' AND VISIBLE_AR = 1 ");	
+			$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_articles WHERE ID_MODULE ='".$module."'  AND LANGUAGE = '".$langQuery."' AND VISIBLE_AR = 1 ");	
 			$queryListArticle = $this->db->query("SELECT * FROM hd_articles 
-					WHERE ID_MODULE ='".$module."' AND VISIBLE_AR = 1 ORDER BY SORT_INDEX, DATE_MODIFIED DESC, DATE_CREATED DESC 
+					WHERE ID_MODULE ='".$module."' AND LANGUAGE = '".$langQuery."'  AND VISIBLE_AR = 1 ORDER BY SORT_INDEX, DATE_MODIFIED DESC, DATE_CREATED DESC 
 					LIMIT ".$offsetSelect." ,".$limitrec);
 			if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; $langQuery = 'En-US';}
 			else { $data['module'] = $queryModule->row()->Vi_VN; $langQuery = 'Vi-VN';}
@@ -155,22 +157,23 @@ class Home extends CI_Controller {
 	
 	public function listimages($module)
 	{
-		$data = array('content'=>'home/listimages');
+		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");				
+
+		$data = array('content'=>'home/listimages');						
+
+		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US;  $langQuery = 'En-US'; }
+		else { $data['module'] = $queryModule->row()->Vi_VN;  $langQuery = 'Vi-VN';}
+		
 		$this->load->library('pagination');
 		$limitrec = 10;
 		$per_page = $this->input->get("per_page");
 		if(!isset($per_page) || $per_page == null) $per_page = 1;
 		$offsetSelect = ($per_page-1)*$limitrec;
-		$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_images WHERE ID_MODULE ='hinhanh' AND VISIBLE_IMG = 1 ");		
+		$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_images WHERE ID_MODULE ='hinhanh'  AND LANGUAGE = '".$langQuery."'  AND VISIBLE_IMG = 1 ");		
 		$data['viewData'] = array('TOTAL_REC' => $queryCount->row()->TOTAL_REC);
 		$queryImageActivity = $this->db->query("SELECT * FROM hd_images 
-					WHERE ID_MODULE ='hinhanh' AND VISIBLE_IMG = 1 ORDER BY SORT_INDEX, DATE_MODIFIED DESC, DATE_CREATED DESC 
+					WHERE ID_MODULE ='hinhanh'  AND LANGUAGE = '".$langQuery."'  AND VISIBLE_IMG = 1 ORDER BY SORT_INDEX, DATE_MODIFIED DESC, DATE_CREATED DESC 
 					LIMIT ".$offsetSelect." ,".$limitrec);
-							
-		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");			
-
-		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
-		else { $data['module'] = $queryModule->row()->Vi_VN; }
 
 		//$data['module'] = $queryModule->row()->NAME_MD;
 		$data['moduleName'] = $data['module'];
@@ -248,8 +251,8 @@ class Home extends CI_Controller {
 		
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");	
 		
-		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
-		else { $data['module'] = $queryModule->row()->Vi_VN; }
+		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US;  $langQuery = 'En-US';}
+		else { $data['module'] = $queryModule->row()->Vi_VN;  $langQuery = 'Vi-VN';}
 			
 		//$data['module'] = $queryModule->row()->NAME_MD;
 		$data['moduleName'] = $data['module'];
@@ -260,10 +263,10 @@ class Home extends CI_Controller {
 			$queryGroupName = $this->db->query("SELECT NAME_GR FROM hd_groups WHERE ID_GR ='".$id."' LIMIT 1");
 			$data['module'] = $data['module']." - ".$queryGroupName->row()->NAME_GR;
 			
-			$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_projects WHERE ID_MODULE ='duan' AND GROUP_ID = ".$id." AND VISIBLE_PRJ = 1 ");		
+			$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_projects WHERE ID_MODULE ='duan'  AND LANGUAGE = '".$langQuery."'  AND GROUP_ID = ".$id." AND VISIBLE_PRJ = 1 ");		
 			$data['viewData'] = array('TOTAL_REC' => $queryCount->row()->TOTAL_REC);
 			$queryProjects = $this->db->query("SELECT * FROM (SELECT * FROM hd_projects 
-						WHERE ID_MODULE ='duan'  AND GROUP_ID = ".$id." AND VISIBLE_PRJ = 1 ORDER BY rand() 
+						WHERE ID_MODULE ='duan'   AND LANGUAGE = '".$langQuery."'  AND GROUP_ID = ".$id." AND VISIBLE_PRJ = 1 ORDER BY rand() 
 						LIMIT ".$offsetSelect." ,".$limitrec." ) a ORDER BY a.YEAR_PRJ DESC, a.NAME_PRJ ");
 			$data["queryProjects"] = $queryProjects->result();
 			
@@ -273,10 +276,10 @@ class Home extends CI_Controller {
 		}
 		else{	
 			
-			$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_projects WHERE ID_MODULE ='duan' AND VISIBLE_PRJ = 1 ");		
+			$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_projects WHERE ID_MODULE ='duan'  AND LANGUAGE = '".$langQuery."'  AND VISIBLE_PRJ = 1 ");		
 			$data['viewData'] = array('TOTAL_REC' => $queryCount->row()->TOTAL_REC);
 			$queryProjects = $this->db->query("SELECT * FROM (SELECT * FROM hd_projects 
-						WHERE ID_MODULE ='duan' AND VISIBLE_PRJ = 1  ORDER BY rand() 
+						WHERE ID_MODULE ='duan'  AND LANGUAGE = '".$langQuery."'  AND VISIBLE_PRJ = 1  ORDER BY rand() 
 						LIMIT ".$offsetSelect." ,".$limitrec." ) a ORDER BY a.YEAR_PRJ DESC, a.NAME_PRJ ");
 			$data["queryProjects"] = $queryProjects->result();
 			

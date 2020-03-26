@@ -110,7 +110,7 @@
 
 <?php 
 	$queryProjectsSame = $this->db->query("SELECT * FROM hd_projects 
-					WHERE ID_MODULE ='duan' AND GROUP_ID = ".$modelProject->GROUP_ID." AND ID_PRJ != ".$modelProject->ID_PRJ
+					WHERE ID_MODULE ='duan'  AND LANGUAGE = '".$langQuery."'  AND GROUP_ID = ".$modelProject->GROUP_ID." AND ID_PRJ != ".$modelProject->ID_PRJ
 				  ." AND VISIBLE_PRJ = 1 ORDER BY PRIORITY DESC, DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 4 ");
 	if( $queryProjectsSame->num_rows() > 0){
 ?>

@@ -10,7 +10,7 @@
 <div class="slider-section">
 	<div class="owl-home-carousel">
 		<?php 
-			$querySlide = $this->db->query("SELECT * FROM hd_images where ID_MODULE ='homeslide' and VISIBLE_IMG = 1 ORDER BY SORT_INDEX");
+			$querySlide = $this->db->query("SELECT * FROM hd_images where ID_MODULE ='homeslide'  AND LANGUAGE = '".$langQuery."'  and VISIBLE_IMG = 1 ORDER BY SORT_INDEX");
 			foreach ($querySlide->result() as $row)
 			{
 		?>
@@ -81,7 +81,7 @@
 	foreach ($queryDuAn->result() as $row)
 	{
 		$queryProjects = $this->db->query("SELECT * FROM hd_projects 
-						WHERE ID_MODULE ='duan'  AND GROUP_ID = ".$row->ID_GR
+						WHERE ID_MODULE ='duan'   AND LANGUAGE = '".$langQuery."'  AND GROUP_ID = ".$row->ID_GR
 					  ." AND VISIBLE_PRJ = 1 ORDER BY PRIORITY DESC, DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 8 ");
 		if( $queryProjects->num_rows() > 0){
 	?>
@@ -156,7 +156,7 @@
 			<div>
 				<div class="row">
 					<?php 
-						$query = $this->db->query("SELECT * FROM hd_articles WHERE ID_MODULE = 'tintuc' AND VISIBLE_AR = 1 ORDER BY PRIORITY DESC, DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 4 ");
+						$query = $this->db->query("SELECT * FROM hd_articles WHERE ID_MODULE = 'tintuc'  AND LANGUAGE = '".$langQuery."'  AND VISIBLE_AR = 1 ORDER BY PRIORITY DESC, DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 4 ");
 						foreach ($query->result() as $row)
 						{
 					?>
