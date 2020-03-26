@@ -150,6 +150,9 @@ class Admin extends CI_Controller {
 	}
 	
 	public function listuser(){
+
+		$langQuery = get_cookie("admin-language");
+
 		$this->load->library('pagination');
 		$limitrec = 20;
 		$per_page = $this->input->get("per_page");
@@ -277,6 +280,8 @@ class Admin extends CI_Controller {
 	
 	public function infomations()
 	{
+		$langQuery = get_cookie("admin-language");
+
 		$data = array('content'=>'admin/infomations');
 		$contentModel = $this->db->query("SELECT * FROM hd_infomations ORDER BY SORT_INDEX ");
 		$data["contentModel"] = $contentModel->result();
@@ -284,6 +289,8 @@ class Admin extends CI_Controller {
 	}
 	
 	public function saveinfomations(){
+		$langQuery = get_cookie("admin-language");
+		
 		$this->db->trans_start();
 		foreach($_POST as $key => $val)  
 		{  			
@@ -370,6 +377,8 @@ class Admin extends CI_Controller {
 	
 	public function elements($module)
 	{		
+		$langQuery = get_cookie("admin-language");
+		
 		$this->load->library('pagination');
 		$limitrec = 20;
 		$searchq = $this->input->get("searchq");
@@ -386,30 +395,30 @@ class Admin extends CI_Controller {
 		switch($queryModule->row()->TYPE_MD){
 			case "1":
 			case "0":
-				$filterQr = (isset($searchq) && $searchq != "") ? " and NAME_AR like '%".$searchq."%' " : " ";
+				$filterQr = (isset($searchq) && $searchq != "") ? "  AND a.LANGUAGE = '".$langQuery."'  and NAME_AR like '%".$searchq."%' " : "   AND a.LANGUAGE = '".$langQuery."' ";
 				if(isset($groupId) && $groupId != "") $filterQr = $filterQr." and GROUP_ID = ".$groupId." ";
 				$data['content'] = 'admin/elementarticles';
-				$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_articles WHERE ID_MODULE ='".$module."'".$filterQr);		
+				$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_articles a WHERE ID_MODULE ='".$module."'".$filterQr);		
 				$data['viewData'] = array('TOTAL_REC' => $queryCount->row()->TOTAL_REC);
 				$queryArticle = $this->db->query("SELECT a.*, g.NAME_GR FROM hd_articles a left join hd_groups g on a.GROUP_ID = g.ID_GR  WHERE a.ID_MODULE ='".$module."' ".$filterQr." ORDER BY SORT_INDEX, DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT ".$offsetSelect." ,".$limitrec);
 				
 				$data['contentModel'] = $queryArticle->result();
 				break;
 			case "2":				
-				$filterQr = (isset($searchq) && $searchq != "") ? " and NAME_PRJ like '%".$searchq."%' " : " ";
+				$filterQr = (isset($searchq) && $searchq != "") ? "  AND a.LANGUAGE = '".$langQuery."'  and NAME_PRJ like '%".$searchq."%' " : "   AND a.LANGUAGE = '".$langQuery."' ";
 				if(isset($groupId) && $groupId != "") $filterQr = $filterQr." and GROUP_ID = ".$groupId." ";
 				$data['content'] = 'admin/elementprojects';
-				$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_projects WHERE ID_MODULE ='".$module."'".$filterQr);		
+				$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_projects a WHERE ID_MODULE ='".$module."'".$filterQr);		
 				$data['viewData'] = array('TOTAL_REC' => $queryCount->row()->TOTAL_REC);
 				$query = $this->db->query("SELECT a.*, g.NAME_GR FROM hd_projects a left join hd_groups g on a.GROUP_ID = g.ID_GR  WHERE a.ID_MODULE ='".$module."' ".$filterQr." ORDER BY DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT ".$offsetSelect." ,".$limitrec);
 				$data['contentModel'] = $query->result();
 				break;
 			case "3":
 			case "4":
-				$filterQr = (isset($searchq) && $searchq != "") ? " and NAME_IMG like '%".$searchq."%' " : " ";
+				$filterQr = (isset($searchq) && $searchq != "") ? "  AND a.LANGUAGE = '".$langQuery."'  and NAME_IMG like '%".$searchq."%' " : "  AND a.LANGUAGE = '".$langQuery."'  ";
 				if(isset($groupId) && $groupId != "") $filterQr = $filterQr." and GROUP_ID = ".$groupId." ";
 				$data['content'] = 'admin/elementimages';
-				$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_images WHERE ID_MODULE ='".$module."'".$filterQr);		
+				$queryCount = $this->db->query("SELECT count(*) TOTAL_REC FROM hd_images a WHERE ID_MODULE ='".$module."'".$filterQr);		
 				$data['viewData'] = array('TOTAL_REC' => $queryCount->row()->TOTAL_REC);
 				$query = $this->db->query("SELECT a.*, g.NAME_GR FROM hd_images a left join hd_groups g on a.GROUP_ID = g.ID_GR  WHERE a.ID_MODULE ='".$module."' ".$filterQr." ORDER BY SORT_INDEX LIMIT ".$offsetSelect." ,".$limitrec);
 				$data['contentModel'] = $query->result();
@@ -425,6 +434,8 @@ class Admin extends CI_Controller {
 	
 	public function addarticle($module)
 	{	
+		$langQuery = get_cookie("admin-language");
+		
 		$this->load->model('Article', 'contentModel');
 		$this->contentModel->ID_MODULE = $module;
 		$this->contentModel->VISIBLE_AR = true;
@@ -446,6 +457,8 @@ class Admin extends CI_Controller {
 	
 	public function modifyarticle($module)
 	{	
+		$langQuery = get_cookie("admin-language");
+		
 		$arid = $_GET['arid'];
 		$this->load->model('Article', 'contentModel');
 		$this->contentModel->ID_MODULE = $module;
@@ -467,7 +480,9 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/master_view', $data);
 	}
 	
-	public function savearticle($module){			
+	public function savearticle($module){		
+		$langQuery = get_cookie("admin-language");
+			
 		$NEW_AFTER_SAVE_ARTICLE = $this->input->post('NEW_AFTER_SAVE_ARTICLE');
 		$IMAGE_ARTICLE_UPLOAD = $this->input->post('IMAGE_ARTICLE_UPLOAD');
 		$page = $this->input->post('page');		
@@ -535,15 +550,17 @@ class Admin extends CI_Controller {
 
 			if($ACTION_EDIT == "false"){				
 				if($queryModule->row()->TYPE_MD == 0){
-					$querySortIndex = $this->db->query("SELECT MAX(SORT_INDEX) MAX_SORT_INDEX FROM hd_articles WHERE ID_MODULE ='".$module."'");
+					$querySortIndex = $this->db->query("SELECT MAX(SORT_INDEX) MAX_SORT_INDEX FROM hd_articles WHERE ID_MODULE ='".$module."' AND a.LANGUAGE = '".$langQuery."' ");
 					if($querySortIndex->row()->MAX_SORT_INDEX == null) $this->contentModel->SORT_INDEX = 0;
 					$this->contentModel->SORT_INDEX = ((int)$querySortIndex->row()->MAX_SORT_INDEX)+1;
 				}
 				$this->contentModel->USER_CREATED = $this->session->fullname.'('.$this->session->username.')';
+				$this->contentModel->LANGUAGE = $langQuery;
 				$this->contentModel->insert_entry();
 			}
 			else{
 				$this->contentModel->USER_MODIFIED = $this->session->fullname.'('.$this->session->username.')';
+				$this->contentModel->LANGUAGE = $langQuery;
 				$this->contentModel->update_entry();
 			}
 			redirect('admin/manage/elements-module-'.$module, 'location');
@@ -585,6 +602,8 @@ class Admin extends CI_Controller {
 	}
 	
 	public function sortarticle($module){
+		$langQuery = get_cookie("admin-language");
+		
 		$currentpage = $this->input->post("currentpage");
 		$items = $this->input->post("items");
 		$this->db->trans_start();
@@ -606,6 +625,8 @@ class Admin extends CI_Controller {
 	
 	public function addproject($module)
 	{	
+		$langQuery = get_cookie("admin-language");
+		
 		$this->load->model('Project', 'contentModel');
 		$this->contentModel->ID_MODULE = $module;
 		$this->contentModel->VISIBLE_PRJ = true;
@@ -628,6 +649,8 @@ class Admin extends CI_Controller {
 	
 	public function modifyproject($module)
 	{	
+		$langQuery = get_cookie("admin-language");
+		
 		$id = $_GET['id'];
 		$this->load->model('Project', 'contentModel');
 		$this->contentModel->ID_MODULE = $module;
@@ -675,7 +698,9 @@ class Admin extends CI_Controller {
 	}
 	
 	
-	public function saveproject($module){			
+	public function saveproject($module){		
+		$langQuery = get_cookie("admin-language");
+			
 		$NEW_AFTER_SAVE_ARTICLE = $this->input->post('NEW_AFTER_SAVE_ARTICLE');
 		$IMAGE_ARTICLE_UPLOAD = $this->input->post('IMAGE_ARTICLE_UPLOAD');
 		$page = $this->input->post('page');		
@@ -769,6 +794,7 @@ class Admin extends CI_Controller {
 			if($ACTION_EDIT == "false"){				
 				
 				$this->contentModel->USER_CREATED = $this->session->fullname.'('.$this->session->username.')';
+				$this->contentModel->LANGUAGE = $langQuery;
 				$this->contentModel->insert_entry();
 				
 				$insert_id = $this->db->insert_id();	
@@ -776,6 +802,7 @@ class Admin extends CI_Controller {
 			}
 			else{
 				$this->contentModel->USER_MODIFIED = $this->session->fullname.'('.$this->session->username.')';
+				$this->contentModel->LANGUAGE = $langQuery;
 				$this->contentModel->update_entry();
 				redirect('admin/manage/elements-module-'.$module, 'location');
 			}
@@ -814,6 +841,8 @@ class Admin extends CI_Controller {
 	
 	public function addimage($module)
 	{	
+		$langQuery = get_cookie("admin-language");
+		
 		$this->load->model('Image', 'contentModel');
 		$this->contentModel->ID_MODULE = $module;
 		$this->contentModel->VISIBLE_IMG = true;
@@ -835,6 +864,8 @@ class Admin extends CI_Controller {
 	
 	public function modifyimage($module)
 	{	
+		$langQuery = get_cookie("admin-language");
+		
 		$id = $_GET['id'];
 		$this->load->model('Image', 'contentModel');
 		$this->contentModel->ID_MODULE = $module;
@@ -882,7 +913,9 @@ class Admin extends CI_Controller {
 		redirect('admin/manage/elements-module-'.$module, 'location');
 	}
 	
-	public function saveimage($module){			
+	public function saveimage($module){	
+		$langQuery = get_cookie("admin-language");
+				
 		$NEW_AFTER_SAVE_ARTICLE = $this->input->post('NEW_AFTER_SAVE_ARTICLE');
 		$IMAGE_ARTICLE_UPLOAD = $this->input->post('IMAGE_ARTICLE_UPLOAD');
 		$page = $this->input->post('page');		
@@ -951,12 +984,14 @@ class Admin extends CI_Controller {
 			if($ACTION_EDIT == "false"){				
 				
 				$this->contentModel->USER_CREATED = $this->session->fullname.'('.$this->session->username.')';
+				$this->contentModel->LANGUAGE = $langQuery;
 				$this->contentModel->insert_entry();	
 				$insert_id = $this->db->insert_id();				
 				redirect('admin/manage/modifyimage-module-'.$module."?id=".$insert_id, 'location');
 			}
 			else{
 				$this->contentModel->USER_MODIFIED = $this->session->fullname.'('.$this->session->username.')';
+				$this->contentModel->LANGUAGE = $langQuery;
 				$this->contentModel->update_entry();
 				redirect('admin/manage/elements-module-'.$module, 'location');
 			}
@@ -965,6 +1000,8 @@ class Admin extends CI_Controller {
 	
 	
 	public function sortimage($module){
+		$langQuery = get_cookie("admin-language");
+		
 		$items = $this->input->post("items");
 		$this->db->trans_start();
 		for ($i = 0; $i < count($items); $i++) {
@@ -1042,11 +1079,15 @@ class Admin extends CI_Controller {
 	//==============================
 	
 	public function listgroups($module){
-		$queryGroup = $this->db->query("SELECT * FROM hd_groups WHERE ID_MODULE ='".$module."' ORDER BY SORT_INDEX");
+		$langQuery = get_cookie("admin-language");
+		
+		$queryGroup = $this->db->query("SELECT * FROM hd_groups WHERE ID_MODULE ='".$module."'  AND LANGUAGE = '".$langQuery."'  ORDER BY SORT_INDEX");
 		$this->load->view("listGroup", array("ListGroupModel" => $queryGroup->result(), "moduleListGroup" => $module));
 	}
 	
 	public function creategroup($module){
+		$langQuery = get_cookie("admin-language");
+		
 		$moduleLoad = $this->input->post("moduleLoad");
 		$groupId = $this->input->post("id");
 		if(isset($groupId) && $groupId != ""){
@@ -1077,6 +1118,8 @@ class Admin extends CI_Controller {
 	
 	
 	public function savegroup($module){
+		$langQuery = get_cookie("admin-language");
+		
 		$addGroupNewAfterSave = $this->input->post('GROUP_NEW_AFTER_SAVE');
 		$ACTION_EDIT = $this->input->post('ACTION');	
 				
@@ -1112,13 +1155,15 @@ class Admin extends CI_Controller {
 		else
 		{
 			if($ACTION_EDIT == "ADD"){				
-				$querySortIndex = $this->db->query("SELECT MAX(SORT_INDEX) MAX_SORT_INDEX FROM hd_groups WHERE ID_MODULE ='".$module."'");
+				$querySortIndex = $this->db->query("SELECT MAX(SORT_INDEX) MAX_SORT_INDEX FROM hd_groups WHERE ID_MODULE ='".$module."' AND LANGUAGE = '".$langQuery."' ");
 				if($querySortIndex->row()->MAX_SORT_INDEX == null) $this->groupModel->SORT_INDEX = 0;
 				$this->groupModel->SORT_INDEX = ((int)$querySortIndex->row()->MAX_SORT_INDEX)+1;
+				$this->contentModel->LANGUAGE = $langQuery;
 				
 				$this->groupModel->insert_entry();
 			}
 			else{
+				$this->contentModel->LANGUAGE = $langQuery;
 				$this->groupModel->update_entry();
 				$this->groupModel->ID_GR = $this->input->post('ID_GR');;
 			}
@@ -1158,6 +1203,8 @@ class Admin extends CI_Controller {
 	}
 	
 	public function sortgroup($module){
+		$langQuery = get_cookie("admin-language");
+		
 		$items = $this->input->post("items");
 		$this->db->trans_start();
 		for ($i = 0; $i < count($items); $i++) {

@@ -190,11 +190,12 @@
 								<li>
 									<?php 
 									$querytuyendung = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='tuyendung'  AND LANGUAGE = '".$langQuery."'  and VISIBLE_AR = 1 ORDER BY DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 1");
-									
+									if($querytuyendung->num_rows() > 0){
 									?>
 									<a href="detail-article/tuyen-dung/tuyen-dung-viewpost-<?php echo $querytuyendung->row()->ID_AR; ?>.html">
 										<i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['tuyendung'] ?>
 									</a>
+									<?php } ?>
 								</li>
 								<li><a href="articles-list-articles/tin-tuc.html"><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['news'] ?></a>
 								</li>
