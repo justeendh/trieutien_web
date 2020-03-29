@@ -1,5 +1,9 @@
 <?php
-	defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
+    defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
+    
+    if(get_cookie("admin-language") == "En-US") { require 'lang-en.php'; }
+    else { require 'lang-vi.php'; }
+    $langQuery = get_cookie("admin-language"); 
 ?>
 
 
@@ -76,7 +80,7 @@
                     <div class="sidebar-content">
                         <!-- Brand -->
                         <a href="admin" class="sidebar-brand">
-                            <span class="sidebar-nav-mini-hide"><strong class="text-nowrap">TRIỀU TIẾN CMS</strong></span>
+                            <span class="sidebar-nav-mini-hide"><strong class="text-nowrap"><?php echo $language_dict['cmsTrieuTien']; ?></strong></span>
                         </a>
                         <!-- END Brand -->
 
@@ -135,7 +139,12 @@
 									<li>
                                         <a href="admin/manage/elements-module-<?php echo $row->ID_MODULE; ?>.html">
                                             <i class="fa fa-list sidebar-nav-icon"></i>
-                                            <span class="sidebar-nav-mini-hide"><?php echo $row->NAME_MD; ?></span>
+                                            <span class="sidebar-nav-mini-hide">
+                                                <?php 
+                                                    if(get_cookie("admin-language") == "En-US") echo $row->En_US; 
+                                                    else echo $row->Vi_VN; 
+                                                ?>
+                                            </span>
                                         </a>
                                     </li>
 								<?php 

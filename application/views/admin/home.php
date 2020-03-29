@@ -1,3 +1,9 @@
+<?php
+    if(get_cookie("admin-language") == "En-US") { require 'lang-en.php'; }
+    else { require 'lang-vi.php'; }
+    $langQuery = get_cookie("admin-language"); 
+?>
+
 <!-- Dashboard Header -->
 <!-- For an image header add the class 'content-header-media' and an image as in the following example -->
 <div class="content-header content-header-media">
@@ -8,24 +14,44 @@
                 <h1>
                 	<i style="display: inline; line-height: 32px; margin: 0; float: none; font-size: inherit; color: #ffd400;" 
                 	 class="fa fa-smile-o"></i> 
-                	Chào <strong><?php echo $this->session->fullname; ?></strong><small></small></h1>
-                	<?php 
+					<?php echo $language_dict['helloAdmin']; ?> <strong><?php echo $this->session->fullname; ?></strong><small></small></h1>
+					<?php 
+					if(get_cookie("admin-language") == "En-US") {
 						$greeting= array(
-							 "aloha"=>"Sự thật là điều quý giá nhất mà chúng ta có. Hãy tiết kiệm nó",
-							 "rawr"=>"Đôi khi, bạn sẽ chẳng biết được những khoảnh khắc quý giá đến nhường nào cho đến khi chúng biến thành những kí ức đẹp",
-							 "ahoy"=>"Thích là phải nhích cho tới đích. Một khi không nhích thì mất tích không cần giải thích",
-							 "salutations"=>"Căn bệnh lớn nhất của thời đại này đó là khi người ta cảm thấy mình không hề được yêu thương",
-							 "bonjour"=>"Rất hân hạnh được phục vụ bạn bạn",
-							 "gday"=>"Điều quan trọng ko phải vị trí ta đang đứng, mà ở hướng ta đang đi",
-							 "whatsup"=>"Người khôn nói ít, nghe nhiều, Lựa lời đối đáp, lựa điều hỏi han",
-							 "hello"=>"Mỗi ngày là một món quà mà cuộc sống đã ban tặng cho chúng ta",
-							 "hola"=>"Niềm tin là một sức mạnh có thể biến điều ko thể thành điều có thể",
-							 "hey"=>"Nhớ đăng xuất sau khi làm việc xong nhé !",
-							 "yo"=>"Người ta có thể quên đi điều bạn nói, nhưng những gì bạn để lại trong lòng họ thì ko bao giờ nhạt phai",
-							 "hi"=>"Sứ mệnh chân chính của con người là sống, chứ không phải tồn tại",
-							 "howdy"=>"Cuộc sống ko bao giờ là bế tắc thực sự hay có khái niệm mất tất cả một khi bạn còn có niềm tin",
-							 "sup"=>"Những kí ức và kỉ niệm đẹp sẽ giúp con người vượt qua những thử thách của cuộc sống"
+							"aloha"=>"Truth is the most precious thing we have. Please save it",
+							 "rawr"=>"Sometimes, you won't know how precious those moments are until they turn into beautiful memories",
+							 "ahoy"=>"Like to have to move to the destination. Once not moving, missing without explanation",
+							 "salutations"=>"The greatest disease of this era is when people feel that they are unloved",
+							 "bonjour"=>"Very pleased to serve you you",
+							 "gday"=>"What matters is not where we stand, but where we are going",
+							 "whatsup"=>"The wise do not speak much, listen much, Choose the answers, choose the questions",
+							 "hello"=>"Every day is a gift that life has given us",
+							 "hola"=>"Trust is a power that can turn the impossible into a possible",
+							 "hey"=>"Remember to log out after you're done!",
+							 "yo"=>"People may forget what you said, but what you leave in their heart is never faded",
+							 "hi"=>"The true mission of man is to live, not to exist",
+							 "howdy"=>"Life is never a deadlock or the concept of losing everything once you have faith",
+							 "sup"=>"Beautiful memories and memories will help people overcome the challenges of life"
 						);
+					}
+					else{
+						$greeting= array(
+							"aloha"=>"Sự thật là điều quý giá nhất mà chúng ta có. Hãy tiết kiệm nó",
+							"rawr"=>"Đôi khi, bạn sẽ chẳng biết được những khoảnh khắc quý giá đến nhường nào cho đến khi chúng biến thành những kí ức đẹp",
+							"ahoy"=>"Thích là phải nhích cho tới đích. Một khi không nhích thì mất tích không cần giải thích",
+							"salutations"=>"Căn bệnh lớn nhất của thời đại này đó là khi người ta cảm thấy mình không hề được yêu thương",
+							"bonjour"=>"Rất hân hạnh được phục vụ bạn bạn",
+							"gday"=>"Điều quan trọng ko phải vị trí ta đang đứng, mà ở hướng ta đang đi",
+							"whatsup"=>"Người khôn nói ít, nghe nhiều, Lựa lời đối đáp, lựa điều hỏi han",
+							"hello"=>"Mỗi ngày là một món quà mà cuộc sống đã ban tặng cho chúng ta",
+							"hola"=>"Niềm tin là một sức mạnh có thể biến điều ko thể thành điều có thể",
+							"hey"=>"Nhớ đăng xuất sau khi làm việc xong nhé !",
+							"yo"=>"Người ta có thể quên đi điều bạn nói, nhưng những gì bạn để lại trong lòng họ thì ko bao giờ nhạt phai",
+							"hi"=>"Sứ mệnh chân chính của con người là sống, chứ không phải tồn tại",
+							"howdy"=>"Cuộc sống ko bao giờ là bế tắc thực sự hay có khái niệm mất tất cả một khi bạn còn có niềm tin",
+							"sup"=>"Những kí ức và kỷ niệm đẹp sẽ giúp con người vượt qua những thử thách của cuộc sống"
+					   );
+					}
 
 						//echo greeting
 						
@@ -81,7 +107,7 @@
 					});
 				</script>
             	<div>
-            		<h4 style="margin: 5px 15px;">Lượt truy cập: <strong style="color: #ffd600;" id="txtVisitorCount"><?php echo count_visitor(false); ?></strong></h4>
+            		<h4 style="margin: 5px 15px;"><?php echo $language_dict['accessCount']; ?>: <strong style="color: #ffd600;" id="txtVisitorCount"><?php echo count_visitor(false); ?></strong></h4>
             	</div>
             </div>
             <!-- END Main Title -->
@@ -127,12 +153,12 @@
 						<div style="margin-top: 8px;" id="container-login-logout-browser"></div>
 					</div>
 					<div class="col-md-3">
-						<h4><strong>Thống kê lượt truy cập</strong></h4>
+						<h4><strong><?php echo $language_dict['tableAccessCount']; ?></strong></h4>
 						<table id="example-datatable" class="table table-vcenter table-condensed table-bordered table-striped table-hover">
 							<thead>
 								<tr role="row" style="background-color: #394263; color: #fff;">
-									<th style="width: 1%;">Trình duyệt</th>
-									<th class=" text-right text-nowrap">Lưu lượng</th>
+									<th style="width: 1%;"><?php echo $language_dict['browser']; ?></th>
+									<th class=" text-right text-nowrap"><?php echo $language_dict['traffic']; ?></th>
 									<th class=" text-right">%</th>
 								</tr>
 							</thead>
@@ -155,8 +181,8 @@
 							</tbody>
 							<thead>
 								<tr role="row" style="background-color: #394263; color: #fff;">
-									<th class="text-nowrap" style="width: 1%;">Hệ điều hành</th>
-									<th class=" text-right text-nowrap">Lưu lượng</th>
+									<th class="text-nowrap" style="width: 1%;"><?php echo $language_dict['operator']; ?></th>
+									<th class=" text-right text-nowrap"><?php echo $language_dict['traffic']; ?></th>
 									<th class=" text-right">%</th>
 								</tr>
 							</thead>
@@ -259,7 +285,7 @@
 			animation: Highcharts.svg
 		},
 		title: {
-			text: 'Biểu đồ lưu lượng truy cập trong 30 ngày gần nhất',
+			text: '<?php echo $language_dict['chart30day']; ?>',
 			style : { "font-family" : "Tahoma", "font-weight" : "bold",  "color" : "#333", "font-size" : "18px", "text-align" : "left" }
 		},
 		//time: { useUTC: false },
@@ -270,7 +296,7 @@
 		},
 		yAxis: {
 			title: {
-				text: 'Lưu lượng',
+				text: '<?php echo $language_dict['traffic']; ?>',
 				style : { "font-family" : "Tahoma", "font-weight" : "bold",  "color" : "#333", "font-size" : "18px", "text-align" : "left" }
 			}, tickInterval : 10
 		},
@@ -311,7 +337,7 @@
 			}
 		},
 		series: [{
-			name: 'Lượt truy cập',
+			name: '<?php echo $language_dict['accessCount']; ?>',
         	color: Highcharts.getOptions().colors[1],
 			data: (function () {
 				var dataChartVisitInit = [];	
@@ -333,7 +359,7 @@
 			type: 'pie'
 		},
 		title: {
-			text: 'Biểu đồ tỉ lệ trình duyệt được sử dụng',
+			text: '<?php echo $language_dict['chartBrowserPercent']; ?>',
 			style : { "font-family" : "Tahoma", "font-weight" : "bold",  "color" : "#333", "font-size" : "18px", "text-align" : "left" }
 		},
 		tooltip: {
