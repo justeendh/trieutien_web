@@ -424,6 +424,7 @@ class Admin extends CI_Controller {
 				$data['contentModel'] = $query->result();
 				break;
 			case "5":
+				$this->load->helper(array('form', 'url'));
 				$data['content'] = 'admin/elementRedirectlink';
 				break;
 			default:
@@ -1220,7 +1221,31 @@ class Admin extends CI_Controller {
 		header('Content-Type: application/json');
 		echo json_encode( $arr );
 	}
-	
+
+
+	public function do_upload_file()
+	{
+			$config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			$config['max_size']             = 100;
+			$config['max_width']            = 1024;
+			$config['max_height']           = 768;
+
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+			if ( ! $this->upload->do_upload('userfile'))
+			{
+					$error = array('error' => $this->upload->display_errors());
+					$this->load->helper(array('form', 'url'));
+					$data['content'] = 'admin/elementRedirectlink';
+			}
+			else
+			{
+					$data = array('upload_data' => $this->upload->data());
+					$this->load->helper(array('form', 'url'));
+					$data['content'] = 'admin/elementRedirectlink';
+			}
+	}
 }
 
 
