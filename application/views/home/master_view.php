@@ -5,7 +5,7 @@
 	else { require 'lang-vi.php'; $langQuery = 'Vi-VN'; }
 
 	$infomations=array();
-	$query = $this->db->query("SELECT KEY_INFO, VAL_INFO FROM hd_infomations WHERE LANGUAGE = '".$langQuery."'");
+	$query = $this->db->query("SELECT KEY_INFO, VAL_INFO FROM hd_infomations a WHERE LANGUAGE = '".$langQuery."' OR a.LANGUAGE = 'ALL' ");
 	foreach ($query->result() as $row)
 	{
 		$infomations[$row->KEY_INFO] = $row->VAL_INFO;
@@ -157,6 +157,11 @@
 												<li>
 													<a href="articles-detail-image-flb/ho-so-nang-luc.html">
 														<i class="fa fa-angle-right"></i><?php echo $language_dict['companyProfile'] ?>
+													</a>
+												</li>
+												<li>
+													<a href="<?php echo $infomations['hsnl_download'] ?>" target="_blank">
+														<i class="fa fa-angle-right"></i>Download <?php echo $language_dict['companyProfile'] ?>
 													</a>
 												</li>
 											</ul>

@@ -283,7 +283,7 @@ class Admin extends CI_Controller {
 		$langQuery = get_cookie("admin-language");
 
 		$data = array('content'=>'admin/infomations');
-		$contentModel = $this->db->query("SELECT * FROM hd_infomations ORDER BY SORT_INDEX ");
+		$contentModel = $this->db->query("SELECT * FROM hd_infomations a WHERE  a.LANGUAGE = '".$langQuery."' OR a.LANGUAGE = 'ALL'  ORDER BY SORT_INDEX ");
 		$data["contentModel"] = $contentModel->result();
 		$this->load->view('admin/master_view', $data);
 	}
