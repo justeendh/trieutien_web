@@ -305,7 +305,7 @@ class Admin extends CI_Controller {
 		$this->db->trans_complete();
 		
 		$data = array('content'=>'admin/infomations');
-		$contentModel = $this->db->query("SELECT * FROM hd_infomations ORDER BY SORT_INDEX ");
+		$contentModel = $this->db->query("SELECT * FROM hd_infomations a WHERE  a.LANGUAGE = '".$langQuery."' OR a.LANGUAGE = 'ALL'  ORDER BY SORT_INDEX ");
 		$data['langQuery'] = $langQuery;
 		$data["contentModel"] = $contentModel->result();
 		if ($this->db->trans_status() === FALSE) $data["viewData"] = array('Failed' => "Lưu các thông tin không thành công !");
