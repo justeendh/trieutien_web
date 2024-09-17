@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
+ 
 
 	public function __construct() {
 		parent::__construct();
@@ -24,8 +25,12 @@ class Admin extends CI_Controller {
 				'secure' => FALSE
 			);
 			$this->input->set_cookie($cookie);
-		}
+		} 
+		set_error_handler(array($this,'myCustomErrorHandler'));
+	}
 
+	public function myCustomErrorHandler($errno, $errstr, $errfile, $errline) {
+		echo "";
 	}
 	
 	public function closeConnection(){
@@ -284,6 +289,7 @@ class Admin extends CI_Controller {
 
 		$data = array('content'=>'admin/infomations');
 		$contentModel = $this->db->query("SELECT * FROM hd_infomations a WHERE  a.LANGUAGE = '".$langQuery."' OR a.LANGUAGE = 'ALL'  ORDER BY SORT_INDEX ");
+		$data['langQuery'] = $langQuery;
 		$data["contentModel"] = $contentModel->result();
 		$this->load->view('admin/master_view', $data);
 	}
@@ -294,12 +300,13 @@ class Admin extends CI_Controller {
 		$this->db->trans_start();
 		foreach($_POST as $key => $val)  
 		{  			
-			$this->db->query("UPDATE hd_infomations SET VAL_INFO = '".($this->input->post($key))."' WHERE KEY_INFO = '".$key."'");
+			$this->db->query("UPDATE hd_infomations SET VAL_INFO = '".($this->input->post($key))."' WHERE KEY_INFO = '".$key."' AND LANGUAGE = '".$langQuery."'");
 		}  
 		$this->db->trans_complete();
 		
 		$data = array('content'=>'admin/infomations');
 		$contentModel = $this->db->query("SELECT * FROM hd_infomations ORDER BY SORT_INDEX ");
+		$data['langQuery'] = $langQuery;
 		$data["contentModel"] = $contentModel->result();
 		if ($this->db->trans_status() === FALSE) $data["viewData"] = array('Failed' => "Lưu các thông tin không thành công !");
 		else $data["viewData"] = array('Success' => "Lưu các thông tin thành công !");
@@ -388,6 +395,7 @@ class Admin extends CI_Controller {
 		$offsetSelect = ($per_page-1)*$limitrec;
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");
 		$data = array();
+		$data['langQuery'] = $langQuery;
 		$data['moduleAllowAction'] = $queryModule->row()->ALLOW_ACTION;
 		$data['moduleName'] = $queryModule->row()->NAME_MD;
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -443,6 +451,7 @@ class Admin extends CI_Controller {
 		
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");		
 		$data = array();
+		$data['langQuery'] = $langQuery;
 		$data['moduleAllowAction'] = $queryModule->row()->ALLOW_ACTION;
 		$data['moduleName'] = $queryModule->row()->NAME_MD;
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -468,6 +477,7 @@ class Admin extends CI_Controller {
 		
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");		
 		$data = array();
+		$data['langQuery'] = $langQuery;
 		$data['moduleAllowAction'] = $queryModule->row()->ALLOW_ACTION;
 		$data['moduleName'] = $queryModule->row()->NAME_MD;
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -513,6 +523,7 @@ class Admin extends CI_Controller {
 		{
 			$this->contentModel->IMAGE_AR = $IMAGE_ARTICLE_UPLOAD;
 			$data = array();
+			$data['langQuery'] = $langQuery;
 			$data['moduleAllowAction'] = $queryModule->row()->ALLOW_ACTION;
 			$data['moduleName'] = $queryModule->row()->NAME_MD;
 			$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -541,7 +552,10 @@ class Admin extends CI_Controller {
 				$success = saveBase64Png($ImageFileName, $IMAGE_ARTICLE_UPLOAD);
 				if($success){
 					$this->contentModel->IMAGE_AR = "imagesUpload/".$ImageFileName;
-					unlink($oldImagePath);
+					try {
+						if (file_exists($oldImagePath)) unlink($oldImagePath);
+					} 
+					catch (Exception $e) {}
 				}
 			}
 			else{
@@ -551,7 +565,7 @@ class Admin extends CI_Controller {
 
 			if($ACTION_EDIT == "false"){				
 				if($queryModule->row()->TYPE_MD == 0){
-					$querySortIndex = $this->db->query("SELECT MAX(SORT_INDEX) MAX_SORT_INDEX FROM hd_articles WHERE ID_MODULE ='".$module."' AND a.LANGUAGE = '".$langQuery."' ");
+					$querySortIndex = $this->db->query("SELECT MAX(SORT_INDEX) MAX_SORT_INDEX FROM hd_articles a WHERE ID_MODULE ='".$module."' AND a.LANGUAGE = '".$langQuery."' ");
 					if($querySortIndex->row()->MAX_SORT_INDEX == null) $this->contentModel->SORT_INDEX = 0;
 					$this->contentModel->SORT_INDEX = ((int)$querySortIndex->row()->MAX_SORT_INDEX)+1;
 				}
@@ -571,10 +585,15 @@ class Admin extends CI_Controller {
 	
 	public function deletearticle($module){
 		$arid = $_GET['arid'];		
-		$fileDetete = $this->db->query("SELECT IMAGE_AR FROM hd_articles WHERE ID =".$arid);
+		$fileDetete = $this->db->query("SELECT IMAGE_AR FROM hd_articles WHERE ID_AR =".$arid);
 		$this->db->where('ID_AR', $arid);
 		$this->db->delete('hd_articles');
-		if($this->db->affected_rows() > 0) unlink($fileDetete->row()->IMAGE_AR);
+		if($this->db->affected_rows() > 0) {
+			try {
+				if (file_exists($fileDetete->row()->IMAGE_AR)) unlink($fileDetete->row()->IMAGE_AR);
+			} 
+			catch (Exception $e) {}
+		}
 		redirect('admin/manage/elements-module-'.$module, 'location');
 	}
 	
@@ -635,6 +654,7 @@ class Admin extends CI_Controller {
 		
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");		
 		$data = array();
+		$data['langQuery'] = $langQuery;
 		$data['moduleAllowAction'] = $queryModule->row()->ALLOW_ACTION;
 		$data['moduleName'] = $queryModule->row()->NAME_MD;
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -660,6 +680,7 @@ class Admin extends CI_Controller {
 		
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");		
 		$data = array();
+		$data['langQuery'] = $langQuery;
 		$data['moduleAllowAction'] = $queryModule->row()->ALLOW_ACTION;
 		$data['moduleName'] = $queryModule->row()->NAME_MD;
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -755,6 +776,7 @@ class Admin extends CI_Controller {
 		{
 			$this->contentModel->IMAGE_PRJ = $IMAGE_ARTICLE_UPLOAD;
 			$data = array();
+			$data['langQuery'] = $langQuery;
 			$data['moduleAllowAction'] = $queryModule->row()->ALLOW_ACTION;
 			$data['moduleName'] = $queryModule->row()->NAME_MD;
 			$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -783,7 +805,10 @@ class Admin extends CI_Controller {
 				$success = saveBase64Png($ImageFileName, $IMAGE_ARTICLE_UPLOAD, "ProjectsPhotos");
 				if($success){
 					$this->contentModel->IMAGE_PRJ = "imagesUpload/ProjectsPhotos/".$ImageFileName;
-					unlink($oldImagePath);
+					try {						 
+						if (file_exists($oldImagePath)) unlink($oldImagePath);
+					} 
+					catch (Exception $e) {}
 				}
 			}
 			else{
@@ -829,9 +854,9 @@ class Admin extends CI_Controller {
 		$this->db->trans_complete();
 		
 		if ($this->db->trans_status() === TRUE){
-			unlink($fileDetete->row()->IMAGE_PRJ);
+			try { if (file_exists($fileDetete->row()->IMAGE_PRJ)) unlink($fileDetete->row()->IMAGE_PRJ); } catch (Exception $e) {}
 			foreach($fileDelOnDisk as $imagedetailDelonDisk){
-				unlink($imagedetailDelonDisk);
+				try { if (file_exists($imagedetailDelonDisk)) unlink($imagedetailDelonDisk); } catch (Exception $e) {}
 			}
 		}
 		redirect('admin/manage/elements-module-'.$module, 'location');
@@ -850,6 +875,7 @@ class Admin extends CI_Controller {
 		
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");		
 		$data = array();
+		$data['langQuery'] = $langQuery;
 		$data['moduleAllowAction'] = $queryModule->row()->ALLOW_ACTION;
 		$data['moduleName'] = $queryModule->row()->NAME_MD;
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -875,6 +901,7 @@ class Admin extends CI_Controller {
 		
 		$queryModule = $this->db->query("SELECT * FROM hd_modules WHERE ID_MODULE ='".$module."' LIMIT 1");		
 		$data = array();
+		$data['langQuery'] = $langQuery;
 		$data['moduleAllowAction'] = $queryModule->row()->ALLOW_ACTION;
 		$data['moduleName'] = $queryModule->row()->NAME_MD;
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -906,9 +933,9 @@ class Admin extends CI_Controller {
 		$this->db->trans_complete();
 		
 		if ($this->db->trans_status() === TRUE){
-			unlink($fileDetete->row()->IMAGE_URL);
+			try { if (file_exists($fileDetete->row()->IMAGE_URL)) unlink($fileDetete->row()->IMAGE_URL); } catch (Exception $e) {}
 			foreach($fileDelOnDisk as $imagedetailDelonDisk){
-				unlink($imagedetailDelonDisk);
+				try { if (file_exists($imagedetailDelonDisk)) unlink($imagedetailDelonDisk); } catch (Exception $e) {}
 			}
 		}
 		redirect('admin/manage/elements-module-'.$module, 'location');
@@ -946,6 +973,7 @@ class Admin extends CI_Controller {
 		{
 			$this->contentModel->IMAGE_URL = $IMAGE_ARTICLE_UPLOAD;
 			$data = array();
+			$data['langQuery'] = $langQuery;
 			$data['moduleAllowAction'] = $queryModule->row()->ALLOW_ACTION;
 			$data['moduleName'] = $queryModule->row()->NAME_MD;
 			$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -974,26 +1002,32 @@ class Admin extends CI_Controller {
 				$success = saveBase64Png($ImageFileName, $IMAGE_ARTICLE_UPLOAD);
 				if($success){
 					$this->contentModel->IMAGE_URL = "imagesUpload/".$ImageFileName;
-					unlink($oldImagePath);
+					try { if (file_exists($oldImagePath)) unlink($oldImagePath); } catch (Exception $e) {}
 				}
 			}
 			else{
 				$this->contentModel->IMAGE_URL = $oldImagePath;
 			}
 			
-
 			if($ACTION_EDIT == "false"){				
-				
-				$this->contentModel->USER_CREATED = $this->session->fullname.'('.$this->session->username.')';
-				$this->contentModel->LANGUAGE = $langQuery;
-				$this->contentModel->insert_entry();	
-				$insert_id = $this->db->insert_id();				
-				redirect('admin/manage/modifyimage-module-'.$module."?id=".$insert_id, 'location');
+				try {
+					$this->contentModel->USER_CREATED = $this->session->fullname.'('.$this->session->username.')';
+					$this->contentModel->LANGUAGE = $langQuery;
+					$this->contentModel->insert_entry();	
+					$insert_id = $this->db->insert_id();				
+					redirect('admin/manage/modifyimage-module-'.$module."?id=".$insert_id, 'location');
+					return;
+				} catch (Exception $e) {
+					unset($e);
+				}
+				redirect('admin/manage/elements-module-'.$module, 'location');
 			}
 			else{
-				$this->contentModel->USER_MODIFIED = $this->session->fullname.'('.$this->session->username.')';
-				$this->contentModel->LANGUAGE = $langQuery;
-				$this->contentModel->update_entry();
+				try {
+					$this->contentModel->USER_MODIFIED = $this->session->fullname.'('.$this->session->username.')';
+					$this->contentModel->LANGUAGE = $langQuery;
+					$this->contentModel->update_entry();
+				} catch (Exception $e) {}
 				redirect('admin/manage/elements-module-'.$module, 'location');
 			}
 		}
@@ -1062,7 +1096,9 @@ class Admin extends CI_Controller {
 		$fileDetete = $this->db->query("SELECT IMAGE_URL FROM hd_images WHERE ID =".$id);
 		$this->db->where('ID', $id);
 		$this->db->delete('hd_images');
-		if($this->db->affected_rows() > 0) unlink($fileDetete->row()->IMAGE_URL);
+		if($this->db->affected_rows() > 0) {
+			try { if (file_exists($fileDetete->row()->IMAGE_URL)) unlink($fileDetete->row()->IMAGE_URL); } catch (Exception $e) {}
+		}
 		
 		redirect('admin/manage/modifyimage-module-'.$module."?id=".$refid, 'location');
 	}
@@ -1073,7 +1109,9 @@ class Admin extends CI_Controller {
 		$fileDetete = $this->db->query("SELECT IMAGE_URL FROM hd_images WHERE ID =".$id);
 		$this->db->where('ID', $id);
 		$this->db->delete('hd_images');
-		if($this->db->affected_rows() > 0) unlink($fileDetete->row()->IMAGE_URL);
+		if($this->db->affected_rows() > 0) {
+			try { if (file_exists($fileDetete->row()->IMAGE_URL)) unlink($fileDetete->row()->IMAGE_URL); } catch (Exception $e) {}
+		}
 		
 		redirect('admin/manage/modifyproject-module-'.$module."?id=".$refid, 'location');
 	}
@@ -1120,7 +1158,9 @@ class Admin extends CI_Controller {
 	
 	public function savegroup($module){
 		$langQuery = get_cookie("admin-language");
-		
+		if($langQuery == null || $langQuery == '') {
+			$langQuery = $this->input->post('langQuery');
+		}
 		$addGroupNewAfterSave = $this->input->post('GROUP_NEW_AFTER_SAVE');
 		$ACTION_EDIT = $this->input->post('ACTION');	
 				
@@ -1147,6 +1187,7 @@ class Admin extends CI_Controller {
 				"addGroupId" => $this->groupModel->ID_GR ,
 				"addGroupName" => $this->groupModel->NAME_GR,
 				"addGroupDesc" => $this->groupModel->DESC_GR,
+				"langQueryVal" => $langQuery,
 				"addGroupSortIndex" =>  $this->groupModel->SORT_INDEX,
 				"addGroupVisibleGroup" => ($this->groupModel->VISIBLE_GR == 1) ? "true" : "false",
 				"addGroupNewAfterSave" => ($addGroupNewAfterSave == 1) ? "true" : "false"

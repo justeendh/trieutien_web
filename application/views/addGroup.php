@@ -5,8 +5,9 @@
        
     <div class="row">
         <div class="col-md-12">
-            <label class="control-label" for="NAME_GR">Tên danh mục/nhóm (<span class="text-danger">*</span>)</label>
+            <label class="control-label" for="NAME_GR">Tên danh mục/nhóm <?php echo $langQueryVal; ?> (<span class="text-danger">*</span>)</label>
             <div>
+                <input type="hidden" name="langQuery" value="<?php echo get_cookie("admin-language"); ?>"/>
                <input type="hidden" name="ACTION" value="<?php echo $addGroupAction; ?>" />
                <input type="hidden" name="ID_GR" value="<?php echo $addGroupId; ?>" />
 			   <input type="hidden" name="SORT_INDEX" value="<?php echo $addGroupSortIndex; ?>" />

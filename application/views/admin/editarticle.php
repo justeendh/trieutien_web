@@ -1,5 +1,5 @@
 
-<form action="admin/manage/savearticle-module-<?php echo $contentModel->ID_MODULE; ?>.html" method="post" accept-charset="utf-8">
+<form action="admin/manage/savearticle-module-<?php echo $contentModel->ID_MODULE; ?>" method="post" accept-charset="utf-8">
 	<div class="row">
 		<div class="col-lg-12">
 			<!-- Timeline Widget -->
@@ -14,7 +14,7 @@
 					</h3>
 					<div class="widget-options">
 						<?php if($viewData['ACTION_EDIT'] == "true") { ?>
-							<a href="admin/manage/addarticle-module-<?php echo $contentModel->ID_MODULE; ?>.html" class="btn btn-default">
+							<a href="admin/manage/addarticle-module-<?php echo $contentModel->ID_MODULE; ?>" class="btn btn-default">
 								<i class="fa fa-plus"></i> Thêm mới
 							</a>&nbsp;&nbsp;&nbsp;&nbsp;
 						<?php } ?>
@@ -86,6 +86,7 @@
 								<div class="col-xs-12 col-sm-9 col-md-9">
 									<div class="form-group">
 										<label for="NAME_AR">Tên bài viết</label>
+										<input type="hidden" name="langQuery" value="<?php echo $langQuery; ?>"/>
 										<input type="hidden" name="ACTION_EDIT" value="<?php echo $viewData['ACTION_EDIT']; ?>"/>
 										<input type="hidden" name="ID_AR" value="<?php echo $contentModel->ID_AR; ?>" />
 										<input type="hidden" name="IMAGE_AR" value="<?php echo $contentModel->IMAGE_AR; ?>" />
@@ -181,6 +182,6 @@
 	}); */
 	CKEDITOR.replace('CONTENT_AR', { height: 600 });
 	<?php if($viewData['ACTION_EDIT'] == "false"){ ?>
-	window.history.pushState("", "Administrators Trieu Tien Portal", "admin/manage/addarticle-module-<?php echo $contentModel->ID_MODULE; ?>.html");
+	window.history.pushState("", "Administrators Trieu Tien Portal", "admin/manage/addarticle-module-<?php echo $contentModel->ID_MODULE; ?>");
 	<?php } ?>
 </script>

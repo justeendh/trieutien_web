@@ -8,11 +8,11 @@
     </div>
     <div class="widget-extra" style="height: auto !important;">
         <div style="padding: 0 0;">
-			 <form action="admin/manage/customcontact-module-contact.html" accept-charset="UTF-8" method="get" >
+			 <form action="admin/manage/customcontact-module-contact" accept-charset="UTF-8" method="get" >
 
 				<?php 
 					$currentURL = current_url();
-					$currentURL = str_replace(base_url(), "", $currentURL);
+					if(base_url() != '/') $currentURL = str_replace(base_url(), "", $currentURL);
 					$paramsQrs   = $_SERVER['QUERY_STRING'];
 					parse_str($paramsQrs, $get_array);
 					unset($get_array["viewtype"]);
@@ -57,7 +57,7 @@
 							<button type="submit" class="btn btn-warning btn-lg">
 								<i class="fa fa-search"></i> <span class="hidden-xs hidden-sm">Tìm kiếm</span>
 							</button> 
-							<a href="admin/manage/customcontact-module-contact.html" class="btn btn-success btn-lg">
+							<a href="admin/manage/customcontact-module-contact" class="btn btn-success btn-lg">
 								<i class="fa fa-refresh"></i> <span class="hidden-xs hidden-sm">Làm mới</span>
 							</a>     
 							<div><span class="help-block hidden-xs hidden-sm">&nbsp;</span></div>
@@ -98,7 +98,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td class="text-center" style="width: 80px;">
-                                                                <a href="page_ready_user_profile.html" class="pull-left">
+                                                                <a href="page_ready_user_profile" class="pull-left">
                                                                     <img src="img/no-user-image.png" style="width: 80px;"
                                                                      alt="Avatar" class="img-circle">
                                                                 </a>
@@ -133,17 +133,17 @@
 															  
 															if($row->STATUS_CONTACT == 0 || $row->STATUS_CONTACT == 2){ 
 														?>
-                                                    	<a href="admin/manage/markviewcontact-module-contact.html?id=<?php echo $row->ID; ?>&<?php echo $newparamsQrsSetStt; ?>"
+                                                    	<a href="admin/manage/markviewcontact-module-contact?id=<?php echo $row->ID; ?>&<?php echo $newparamsQrsSetStt; ?>"
                                                     		onClick="return confirm('Đánh dấu đã xem mục này ?');" class="btn btn-success btn-lg">
 															<i class="fa fa-eye"></i> Đánh dấu đã xem
 														</a>         
 														<?php } if($row->STATUS_CONTACT == 1 || $row->STATUS_CONTACT == 2) { ?>     
-														<a href="admin/manage/markunviewcontact-module-contact.html?id=<?php echo $row->ID; ?>&<?php echo $newparamsQrsSetStt; ?>"
+														<a href="admin/manage/markunviewcontact-module-contact?id=<?php echo $row->ID; ?>&<?php echo $newparamsQrsSetStt; ?>"
                                                     		onClick="return confirm('Đánh dấu chưa xem mục này ?');" class="btn btn-success btn-lg">
 															<i class="fa fa-eye-slash"></i> Đánh dấu chưa xem
 														</a>   
 														<?php }  if($row->STATUS_CONTACT != 2) { ?>                                
-														<a href="admin/manage/markreplycontact-module-contact.html?id=<?php echo $row->ID; ?>&<?php echo $newparamsQrsSetStt; ?>"
+														<a href="admin/manage/markreplycontact-module-contact?id=<?php echo $row->ID; ?>&<?php echo $newparamsQrsSetStt; ?>"
 															onClick="return confirm('Đánh dấu đã trả lời mục này ?');" class="btn btn-success btn-lg">
 															<i class="fa fa-check"></i> Đánh dấu đã xong
 														</a>
@@ -163,7 +163,7 @@
                 
                 <div class="text-center">
 					<?php 		
-						$config['base_url'] = 'admin/manage/customcontact-module-contact.html';
+						$config['base_url'] = 'admin/manage/customcontact-module-contact';
 						$config['total_rows'] = (int)$viewData['TOTAL_REC'];
 						$config['per_page'] = 20;
 						$config['full_tag_open'] = "<div class='pagination pagination-lg'>";

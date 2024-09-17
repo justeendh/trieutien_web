@@ -3,11 +3,11 @@
     var instanceGroup_<?php echo $groupManageModal['KeyManage']; ?> = new ModuleViewJs();
     instanceGroup_<?php echo $groupManageModal['KeyManage']; ?>.Init({
         ModuleName: "group",
-        ActionUrl: "admin/manage/listgroups-module-<?php echo $groupManageModal['Module']; ?>.html",
+        ActionUrl: "admin/manage/listgroups-module-<?php echo $groupManageModal['Module']; ?>",
         targetUpdateInsert: "groups-data-container_<?php echo $groupManageModal['KeyManage']; ?>",
         targetInsertForm: "formAddGroup_<?php echo $groupManageModal['KeyManage']; ?>",
-        inserFormUrl: "admin/manage/creategroup-module-<?php echo $groupManageModal['Module']; ?>.html",
-		deleteUrl : "admin/manage/deletegroup-module-<?php echo $groupManageModal['Module']; ?>.html"
+        inserFormUrl: "admin/manage/creategroup-module-<?php echo $groupManageModal['Module']; ?>",
+		deleteUrl : "admin/manage/deletegroup-module-<?php echo $groupManageModal['Module']; ?>"
     });
     instanceGroup_<?php echo $groupManageModal['KeyManage']; ?>.setModule('<?php echo $groupManageModal['Module']; ?>');
     instanceGroup_<?php echo $groupManageModal['KeyManage']; ?>.setPageSize(10);
@@ -62,7 +62,7 @@
                 </button>
             </div>
             <div class="modal-body">                
-				<form class="formAjaxSubmit" action="admin/manage/savegroup-module-<?php echo $groupManageModal['Module']; ?>.html" method="post"
+				<form class="formAjaxSubmit" action="admin/manage/savegroup-module-<?php echo $groupManageModal['Module']; ?>" method="post"
 					targetUpdateId="formAddGroup_<?php echo $groupManageModal['KeyManage']; ?>" confirm="Bạn chắc chắn thực hiện thao tác này ?"
 					OnSuccess="instanceGroup_<?php echo $groupManageModal['KeyManage']; ?>.OnSuccessInsert">
 					<input type="hidden" name="ID_MODULE" value="<?php echo $groupManageModal['Module']; ?>" />

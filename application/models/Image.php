@@ -17,6 +17,7 @@
 		public $USER_CREATED;
 		public $DATE_MODIFIED;
 		public $USER_MODIFIED;
+		public $LANGUAGE;
 		
 		public function loadfromquery($queryData){
 			$this->ID = $queryData->ID;
@@ -82,6 +83,7 @@
 			
 			$this->DATE_MODIFIED = $this->DATE_CREATED;
 			$this->USER_MODIFIED = $this->USER_CREATED;
+			$this->LANGUAGE = $_POST['langQuery'];
 			
 			$this->db->insert('hd_images', $this);
         }
@@ -108,6 +110,7 @@
 			
 			$this->DATE_CREATED = $_POST['DATE_CREATED'];
 			$this->USER_CREATED = $_POST['USER_CREATED'];
+			$this->LANGUAGE = $_POST['langQuery'];
 			$this->DATE_MODIFIED = date('Y-m-d H:i:s');
 
 			$this->db->update('hd_images', $this, array('ID' => $_POST['ID']));

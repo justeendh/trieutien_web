@@ -7,6 +7,7 @@
 		public $DESC_GR;
 		public $SORT_INDEX;
 		public $VISIBLE_GR;
+		public $LANGUAGE;
 		
 		public function loadfromquery($queryData){
 			$this->ID_GR = $queryData->ID_GR;
@@ -27,6 +28,7 @@
 			$this->NAME_GR = $_POST['NAME_GR'];
 			$this->DESC_GR = $_POST['DESC_GR'];
 			$this->SORT_INDEX = $_POST['SORT_INDEX'];
+			$this->LANGUAGE = $_POST['langQuery'];
 			
 			if(!isset($_POST['VISIBLE_GR'])) $this->VISIBLE_GR = "0";
 			else $this->VISIBLE_GR = $_POST['VISIBLE_GR'];
@@ -39,6 +41,7 @@
 			$this->NAME_GR = $_POST['NAME_GR'];
 			$this->DESC_GR = $_POST['DESC_GR'];
 			$this->SORT_INDEX = $_POST['SORT_INDEX'];
+			$this->LANGUAGE = $_POST['langQuery'];
 			if(!isset($_POST['VISIBLE_GR'])) $this->VISIBLE_GR = "0";
 			else $this->VISIBLE_GR = $_POST['VISIBLE_GR'];
 			$this->db->insert('hd_groups', $this);
@@ -51,6 +54,7 @@
 			$this->NAME_GR = $_POST['NAME_GR'];
 			$this->DESC_GR = $_POST['DESC_GR'];
 			$this->SORT_INDEX = $_POST['SORT_INDEX'];
+			$this->LANGUAGE = $_POST['langQuery'];
 			if(!isset($_POST['VISIBLE_GR'])) $this->VISIBLE_GR = "0";
 			else $this->VISIBLE_GR = $_POST['VISIBLE_GR'];
 

@@ -136,7 +136,7 @@
 								<li><a href=""><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['homePage'] ?></a>
 								</li>
 								<li>
-									<a href="articles-list-articles/gioi-thieu.html"><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['aboutUs'] ?></a>
+									<a href="articles-list-articles/gioi-thieu"><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['aboutUs'] ?></a>
 									<div class="sub-item-ctn">
 										<div class="submenu-ctn">
 											<ul>
@@ -146,7 +146,7 @@
 													{
 													?>
 														<li>
-															<a href="detail-article/gioi-thieu/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>.html">
+															<a href="detail-article/gioi-thieu/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>">
 																<i class="fa fa-angle-right"></i><?php echo $row->NAME_AR; ?>
 															</a>
 														</li>
@@ -155,7 +155,7 @@
 												?>
 												
 												<li>
-													<a href="articles-detail-image-flb/ho-so-nang-luc.html">
+													<a href="articles-detail-image-flb/ho-so-nang-luc">
 														<i class="fa fa-angle-right"></i><?php echo $language_dict['companyProfile'] ?>
 													</a>
 												</li>
@@ -169,7 +169,7 @@
 									</div>
 								</li>
 								<li>
-									<a href="articles-list-projects/du-an.html"><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['projects'] ?></a>
+									<a href="articles-list-projects/du-an"><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['projects'] ?></a>
 									<div class="sub-item-ctn">
 										<div class="submenu-ctn">
 											<ul>
@@ -179,7 +179,7 @@
 													{
 													?>
 														<li>
-															<a href="group-list-projects/du-an/<?php echo friendlyName($row->NAME_GR); ?>-group-<?php echo $row->ID_GR; ?>.html">
+															<a href="group-list-projects/du-an/<?php echo friendlyName($row->NAME_GR); ?>-group-<?php echo $row->ID_GR; ?>">
 																<i class="fa fa-angle-right"></i><?php echo $row->NAME_GR; ?>
 															</a>
 														</li>
@@ -190,21 +190,21 @@
 										</div>
 									</div>
 								</li>
-								<li><a href="articles-list-images/hinh-anh.html"><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['photo'] ?></a>
+								<li><a href="articles-list-images/hinh-anh"><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['photo'] ?></a>
 								</li>
 								<li>
 									<?php 
 									$querytuyendung = $this->db->query("SELECT * FROM hd_articles where ID_MODULE ='tuyendung'  AND LANGUAGE = '".$langQuery."'  and VISIBLE_AR = 1 ORDER BY DATE_MODIFIED DESC, DATE_CREATED DESC LIMIT 1");
 									if($querytuyendung->num_rows() > 0){
 									?>
-									<a href="detail-article/tuyen-dung/tuyen-dung-viewpost-<?php echo $querytuyendung->row()->ID_AR; ?>.html">
+									<a href="detail-article/tuyen-dung/tuyen-dung-viewpost-<?php echo $querytuyendung->row()->ID_AR; ?>">
 										<i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['tuyendung'] ?>
 									</a>
 									<?php } ?>
 								</li>
-								<li><a href="articles-list-articles/tin-tuc.html"><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['news'] ?></a>
+								<li><a href="articles-list-articles/tin-tuc"><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['news'] ?></a>
 								</li>
-								<li><a href="page/contact.html"><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['contact'] ?></a>
+								<li><a href="page/contact"><i class="fa fa-chevron-circle-right"></i><?php echo $language_dict['contact'] ?></a>
 								</li>
 							</ul>
 						</nav>
@@ -232,7 +232,8 @@
 								<div>
 									<div class="owl-doitac">
 									<?php  										
-										$queryDoitac = $this->db->query("SELECT * FROM hd_images WHERE ID_MODULE = 'doitac'");
+										$queryDoitac = $this->db->query("SELECT * FROM hd_images WHERE ID_MODULE = '
+										..'");
 										foreach ($queryDoitac->result() as $row) { ?>
 										<div class="doitac-item-ctn">
 											<div>
@@ -285,7 +286,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$(".owl-doitac").owlCarousel({
-				loop: true,
+				loop: false,
 				autoplay: true,
 				autoplayTimeout:3000,
 				autoplaySpeed: 1000,

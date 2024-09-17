@@ -121,7 +121,7 @@
 			<div class="list-news-block row">
 				<?php  foreach ($queryProjectsSame->result() as $rowPrj) { ?>
 				<div class="col-xs-12 col-sm-6 col-md-3 construc-item">
-					<a class="image-link" href="detail-project/du-an/<?php echo friendlyName($rowPrj->NAME_PRJ); ?>-viewpost-<?php echo $rowPrj->ID_PRJ ?>.html"
+					<a class="image-link" href="detail-project/du-an/<?php echo friendlyName($rowPrj->NAME_PRJ); ?>-viewpost-<?php echo $rowPrj->ID_PRJ ?>"
 							title="<?php echo $rowPrj->NAME_PRJ ?>">
 						<img class="img-c-two2" src="<?php echo $rowPrj->IMAGE_PRJ ?>" alt="<?php echo $rowPrj->NAME_PRJ ?>">
 						<div class="fdw-background2">
@@ -129,7 +129,7 @@
 						</div>
 					</a>				
 					<div class="project-info-wrap">
-						<a href="detail-project/du-an/<?php echo friendlyName($rowPrj->NAME_PRJ); ?>-viewpost-<?php echo $rowPrj->ID_PRJ ?>.html"
+						<a href="detail-project/du-an/<?php echo friendlyName($rowPrj->NAME_PRJ); ?>-viewpost-<?php echo $rowPrj->ID_PRJ ?>"
 							title="<?php echo $rowPrj->NAME_PRJ ?>">
 							<h4 class="text-primary-font project-name">
 								<?php echo $rowPrj->NAME_PRJ ?>

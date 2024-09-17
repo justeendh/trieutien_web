@@ -120,7 +120,7 @@
                             </li>
                             <?php if($this->session->isadmin == true) { ?>
                             <li>
-                                <a href="admin/manage/listuser-module-user.html">
+                                <a href="admin/manage/listuser-module-user">
                                     <i class="gi gi-user sidebar-nav-icon"></i>
                                     <span class="sidebar-nav-mini-hide">Quản lý người dùng</span>
                                 </a>
@@ -137,7 +137,7 @@
 								{
 								?>
 									<li>
-                                        <a href="admin/manage/elements-module-<?php echo $row->ID_MODULE; ?>.html">
+                                        <a href="admin/manage/elements-module-<?php echo $row->ID_MODULE; ?>">
                                             <i class="fa fa-list sidebar-nav-icon"></i>
                                             <span class="sidebar-nav-mini-hide">
                                                 <?php 
@@ -155,13 +155,13 @@
                                 <span class="sidebar-header-title">Khác</span>
                             </li>
                             <li>
-                                <a href="admin/manage/infomations-module-info.html">
+                                <a href="admin/manage/infomations-module-info">
                                     <i class="fa fa-envelope-o sidebar-nav-icon"></i>
                                     <span class="sidebar-nav-mini-hide">Thông tin chung</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/manage/customcontact-module-contact.html">
+                                <a href="admin/manage/customcontact-module-contact">
                                     <i class="fa fa-envelope-o sidebar-nav-icon"></i>
                                     <span class="sidebar-nav-mini-hide">Liên hệ/góp ý</span>
                                 </a>
@@ -279,7 +279,7 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <div class="container-fluid">
-                    	<form action="admin/manage/changepassworduser-module-user.html" method="post" class="form-horizontal form-bordered">
+                    	<form action="admin/manage/changepassworduser-module-user" method="post" class="form-horizontal form-bordered">
                         
 							<fieldset>
 								<div class="form-group">
@@ -318,7 +318,7 @@
 				callback: function (result) {
 					// result will be true if button was click, while it will be false if functions close the dialog directly.
 					if (result) {
-						window.location = "admin/manage/logout-module-userlogout.html";
+						window.location = "admin/manage/logout-module-userlogout";
 					} else {
 						//alert('Nope.');
 					}

@@ -1,5 +1,5 @@
 
-<form action="admin/manage/saveinfomations-module-info.html" method="post">
+<form action="admin/manage/saveinfomations-module-info" method="post">
     <div class="row">
         <div class="col-sm-12">
             <!-- Timeline Widget -->
@@ -177,5 +177,5 @@
 
 
 <script>
-	window.history.pushState("", "Cập nhật thông tin chung", 'admin/manage/infomations-module-info.html');
+	window.history.pushState("", "Cập nhật thông tin chung", 'admin/manage/infomations-module-info');
 </script>

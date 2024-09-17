@@ -42,14 +42,14 @@
 			<div class="list-news-block row">
 				<?php  foreach ($queryProjects as $row) { ?>
 				<div class="col-xs-12 col-sm-6 col-md-3 construc-item">
-					<a class="image-link" href="detail-project/du-an/<?php echo friendlyName($row->NAME_PRJ); ?>-viewpost-<?php echo $row->ID_PRJ ?>.html" title="<?php echo $row->NAME_PRJ ?>">
+					<a class="image-link" href="detail-project/du-an/<?php echo friendlyName($row->NAME_PRJ); ?>-viewpost-<?php echo $row->ID_PRJ ?>" title="<?php echo $row->NAME_PRJ ?>">
 						<img class="img-c-two2" src="thumbnail/img?imageurl=<?php echo default_value($row->IMAGE_PRJ, 'img/no-image.jpg'); ?>&width=500" alt="<?php echo $row->NAME_PRJ ?>">
 						<div class="fdw-background2">
 							<div class="detail-btn"><?php echo $language_dict['viewDetail'] ?></div>
 						</div>
 					</a>				
 					<div class="project-info-wrap">
-						<a href="detail-project/du-an/<?php echo friendlyName($row->NAME_PRJ); ?>-viewpost-<?php echo $row->ID_PRJ ?>.html" title="<?php echo $row->NAME_PRJ ?>">
+						<a href="detail-project/du-an/<?php echo friendlyName($row->NAME_PRJ); ?>-viewpost-<?php echo $row->ID_PRJ ?>" title="<?php echo $row->NAME_PRJ ?>">
 							<h4 class="text-primary-font project-name">
 								<?php echo $row->NAME_PRJ ?>
 							</h4>

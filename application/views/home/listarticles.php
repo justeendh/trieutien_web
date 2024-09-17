@@ -56,13 +56,13 @@
 						<div class="col-md-3 col-xs-12 col-sm-6 newspaper-item-ctn">
 							<div class="articles-news-ctn">
 								<div class="img">
-									<a href="detail-article/<?php echo $moduleID ?>/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>.html" 
+									<a href="detail-article/<?php echo $moduleID ?>/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>" 
 										title="<?php echo $row->NAME_AR; ?>">
 										<img src="thumbnail/img?imageurl=<?php echo default_value($row->IMAGE_AR, 'img/no-image.jpg'); ?>&width=500" alt="<?php echo $row->NAME_AR ?>"/>
 									</a>
 								</div>
 								<div class="title text-primary-font">
-									<a href="detail-article/<?php echo $moduleID ?>/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>.html" 
+									<a href="detail-article/<?php echo $moduleID ?>/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>" 
 										title="<?php echo $row->NAME_AR; ?>">
 										<h4><?php echo $row->NAME_AR; ?></h4>
 									</a>
@@ -76,7 +76,7 @@
 					</div>
 					<div class="text-center">
 						<?php 
-							$config['base_url'] = 'articles-list-articles/'.$moduleID.'.html';
+							$config['base_url'] = 'articles-list-articles/'.$moduleID.'';
 							$config['total_rows'] = $viewData["TOTAL_REC"];
 							$config['per_page'] = 20;
 							$config['full_tag_open'] = "<div class='pagination pagination-lg'>";

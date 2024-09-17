@@ -13,7 +13,7 @@
 				</a>
 				<?php } ?>
 				<?php if (strpos($moduleAllowAction, 'ADD') !== false) { ?>
-				<a href="admin/manage/addimage-module-<?php echo $moduleID; ?>.html" class="btn btn-default">
+				<a href="admin/manage/addimage-module-<?php echo $moduleID; ?>" class="btn btn-default">
 					<i class="fa fa-plus"></i> Thêm mới
 				</a>
 				<?php } ?>
@@ -23,7 +23,7 @@
     <div class="widget-extra" style="height: auto !important;">
         
         <div style="padding: 0 0;">
-            <form action="admin/manage/elements-module-<?php echo $moduleID; ?>.html" accept-charset="UTF-8" method="get" >
+            <form action="admin/manage/elements-module-<?php echo $moduleID; ?>" accept-charset="UTF-8" method="get" >
             
             	<?php 
 					$queryDuAn = $this->db->query("SELECT * FROM hd_groups where ID_MODULE ='".$moduleID."' ORDER BY SORT_INDEX");
@@ -76,7 +76,7 @@
 									<button type="submit" class="btn btn-warning btn-lg">
 										<i class="fa fa-search"></i><span class="hidden-xs hidden-sm" style="display: inline !important;">&nbsp;&nbsp;Tìm kiếm</span>
 									</button>
-									<a href="admin/manage/elements-module-<?php echo $moduleID; ?>.html" class="btn btn-primary btn-lg">
+									<a href="admin/manage/elements-module-<?php echo $moduleID; ?>" class="btn btn-primary btn-lg">
 										<i class="fa fa-refresh"></i><span class="hidden-xs hidden-sm" style="display: inline !important;">&nbsp;&nbsp;Làm mới</span>
 									</a>
 								</div>
@@ -105,7 +105,9 @@
 						</div>
 						<a href="<?php echo $row->IMAGE_URL; ?>" class="gallery-link" title="<?php echo $row->NAME_IMG; ?>">							
 							<div class="imgctnlb">
-								<img src="thumbnail/img?imageurl=<?php echo default_value($row->IMAGE_URL, 'img/no-image.jpg'); ?>&width=400" alt="<?php echo $row->NAME_IMG; ?>" style="width: 100%;" />
+								<img src="thumbnail/img?imageurl=<?php echo default_value($row->IMAGE_URL, 'img/no-image.jpg'); ?>&width=400" 
+									onerror="this.src = '/img/no-image.jpg'"
+									alt="<?php echo $row->NAME_IMG; ?>" style="width: 100%;" />
 							</div>
 						</a>
 						<div>
@@ -118,12 +120,12 @@
 						</div>
 						<div class="options-cnt">
 							<?php if (strpos($moduleAllowAction, 'MODIFY') !== false) { ?>
-							<a href="admin/manage/modifyimage-module-<?php echo $moduleID; ?>.html?id=<?php echo $row->ID; ?>" class="btn btn-info">
+							<a href="admin/manage/modifyimage-module-<?php echo $moduleID; ?>?id=<?php echo $row->ID; ?>" class="btn btn-info">
 								<i class="fa fa-pencil"></i>
 							</a>&nbsp;&nbsp;
 							<?php } ?>
 							<?php if (strpos($moduleAllowAction, 'DELETE') !== false) { ?>
-							<a href="admin/manage/deleteimage-module-<?php echo $moduleID; ?>.html?id=<?php echo $row->ID; ?>" 
+							<a href="admin/manage/deleteimage-module-<?php echo $moduleID; ?>?id=<?php echo $row->ID; ?>" 
 										  onClick="return confirm('Xác nhận xoá bản ghi này ?');" class="btn btn-danger">
 								<i class="gi gi-bin"></i>
 							</a>&nbsp;&nbsp;
@@ -149,7 +151,7 @@
                 
 				<div class="text-center">
 					<?php 
-						$config['base_url'] = 'admin/manage/elements-module-'.$moduleID.'.html';
+						$config['base_url'] = 'admin/manage/elements-module-'.$moduleID.'';
 						$config['total_rows'] = (int)$viewData['TOTAL_REC'];
 						$config['per_page'] = 20;
 						$config['full_tag_open'] = "<div class='pagination pagination-lg'>";
@@ -213,7 +215,7 @@
         var visible = $(this).prop("checked");
         $.ajax({
             method: "POST",
-            url: "admin/manage/tooglevisibleimage-module-<?php echo $moduleID; ?>.html", data: { "id": id, "visible": visible }, success: function (result) {
+            url: "admin/manage/tooglevisibleimage-module-<?php echo $moduleID; ?>", data: { "id": id, "visible": visible }, success: function (result) {
                 if (result.success) {
                     $.bootstrapGrowl('<h4>SUCCESS!</h4> <p>Thao tác thực hiện thành công</p>', {
                         type: "success",
@@ -267,7 +269,7 @@
 			$.ajax({
 				data: { "items": data },
 				type: 'POST',
-				url: 'admin/manage/sortimage-module-<?php echo $moduleID; ?>.html',
+				url: 'admin/manage/sortimage-module-<?php echo $moduleID; ?>',
 				success: function (response) {
 					if (!response.success) {
 						$('#image-list').sortable("cancel");

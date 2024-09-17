@@ -58,7 +58,7 @@ class Home extends CI_Controller {
 			break;
 
 			default:
-				throw new InvalidArgumentException('File "'.$filename.'" is not valid jpg, png or gif image.');
+				throw new InvalidArgumentException('File is not valid jpg, png or gif image.');
 			break;
 		}
 		//imagejpeg(imagescale(imagecreatefrompng($imageurl), $width));
@@ -87,6 +87,9 @@ class Home extends CI_Controller {
 
 		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; $langQuery = 'En-US';}
 		else { $data['module'] = $queryModule->row()->Vi_VN; $langQuery = 'Vi-VN';}
+
+		if(get_cookie("language") == "en") { $data['langQuery'] = 'En-US'; }
+		else { $data['langQuery'] = 'Vi-VN'; }
 
 		$queryArticles = $this->db->query("SELECT * FROM hd_articles WHERE ID_MODULE = '.$module.' AND LANGUAGE = '".$langQuery."' ");
 		$resultData = $queryArticles->result();
@@ -140,6 +143,9 @@ class Home extends CI_Controller {
 		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
 		else { $data['module'] = $queryModule->row()->Vi_VN; }
 
+		if(get_cookie("language") == "en") { $data['langQuery'] = 'En-US'; }
+		else { $data['langQuery'] = 'Vi-VN'; }
+
 		//$data['module'] = $queryModule->row()->NAME_MD;
 		$data['moduleName'] = $data['module']; //$queryModule->row()->NAME_MD;
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -163,6 +169,9 @@ class Home extends CI_Controller {
 
 		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US;  $langQuery = 'En-US'; }
 		else { $data['module'] = $queryModule->row()->Vi_VN;  $langQuery = 'Vi-VN';}
+
+		if(get_cookie("language") == "en") { $data['langQuery'] = 'En-US'; }
+		else { $data['langQuery'] = 'Vi-VN'; }
 		
 		$this->load->library('pagination');
 		$limitrec = 10;
@@ -199,6 +208,9 @@ class Home extends CI_Controller {
 		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
 		else { $data['module'] = $queryModule->row()->Vi_VN; }
 
+		if(get_cookie("language") == "en") { $data['langQuery'] = 'En-US'; }
+		else { $data['langQuery'] = 'Vi-VN'; }
+
 		//$data['module'] = $queryModule->row()->NAME_MD;
 		$data['moduleName'] = $data['module'];
 		$data['moduleID'] = $queryModule->row()->ID_MODULE;
@@ -223,6 +235,9 @@ class Home extends CI_Controller {
 		
 		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
 		else { $data['module'] = $queryModule->row()->Vi_VN; }
+
+		if(get_cookie("language") == "en") { $data['langQuery'] = 'En-US'; }
+		else { $data['langQuery'] = 'Vi-VN'; }
 
 		//$data['module'] = $queryModule->row()->NAME_MD;
 		$data['moduleName'] = $data['module'];
@@ -253,6 +268,9 @@ class Home extends CI_Controller {
 		
 		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US;  $langQuery = 'En-US';}
 		else { $data['module'] = $queryModule->row()->Vi_VN;  $langQuery = 'Vi-VN';}
+
+		if(get_cookie("language") == "en") { $data['langQuery'] = 'En-US'; }
+		else { $data['langQuery'] = 'Vi-VN'; }
 			
 		//$data['module'] = $queryModule->row()->NAME_MD;
 		$data['moduleName'] = $data['module'];
@@ -303,6 +321,9 @@ class Home extends CI_Controller {
 		
 		if(get_cookie("language") == "en") { $data['module'] = $queryModule->row()->En_US; }
 		else { $data['module'] = $queryModule->row()->Vi_VN; }
+
+		if(get_cookie("language") == "en") { $data['langQuery'] = 'En-US'; }
+		else { $data['langQuery'] = 'Vi-VN'; }
 
 		//$data['module'] = $queryModule->row()->NAME_MD;
 		$data['moduleName'] = $data['module'];
@@ -363,6 +384,10 @@ class Home extends CI_Controller {
 				'contactError' => 'Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng tôi. Xin cảm ơn'
 			);			
 		}
+
+		if(get_cookie("language") == "en") { $data['langQuery'] = 'En-US'; }
+		else { $data['langQuery'] = 'Vi-VN'; }
+		
 		$data['module'] = "Liên hệ";
 		$data = array('content'=>'home/contact');
 		if(!isset($_POST["submit"])){

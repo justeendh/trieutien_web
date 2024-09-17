@@ -20,11 +20,11 @@
 			<div data-toggle="lightbox-gallery">
 			<?php  if(isset($queryImageListModel) && count($queryImageListModel) > 0) { ?>			
 
-				<div class="bb-custom-wrapper">
-					<div id="bb-bookblock" class="bb-bookblock">
+				<div> 
+					<div>
 	
 					<?php  foreach($queryImageListModel as $row) { ?>
-							<div class="bb-item">
+							<div>
 								<a href="<?php echo $row->IMAGE_URL ?>" class="gallery-link" title="<?php echo $moduleName; ?>">
 									<img src="<?php echo default_value($row->IMAGE_URL, 'img/no-image.jpg'); ?>" title="<?php echo $moduleName; ?>" 
 												alt="<?php echo $moduleName; ?>">
@@ -33,12 +33,12 @@
 					<?php   } ?>
 						
 					</div>
-					<nav>
+					<!-- <nav>
 						<a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first">First page</a>
 						<a id="bb-nav-prev" href="#" class="bb-custom-icon bb-custom-icon-arrow-left">Previous</a>
 						<a id="bb-nav-next" href="#" class="bb-custom-icon bb-custom-icon-arrow-right">Next</a>
 						<a id="bb-nav-last" href="#" class="bb-custom-icon bb-custom-icon-last">Last page</a>
-					</nav>
+					</nav> -->
 				</div>
 			<?php
 				}
@@ -59,7 +59,7 @@
 </section>
 <script src="js/modernizr.custom.js"></script>
 <script src="js/jquerypp.custom.js"></script>
-<script src="js/jquery.bookblock.js"></script>
+<!-- <script src="js/jquery.bookblock.js"></script>
 <script>
 	var Page = (function() {
 
@@ -142,4 +142,4 @@
 </script>
 <script>
 		Page.init();
-</script>
+</script> -->

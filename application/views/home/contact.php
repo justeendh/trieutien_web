@@ -42,7 +42,7 @@
 								<?php echo $infomations['contactformintro']; ?>
 							</div>	
 							<div class="the-form-wrapper">
-								<form action="page/contact.html" method="post"><input name="__RequestVerificationToken" type="hidden" value="LqgBfKVBe4KPRiP4dXbIv5DHmd4mRWjgaeCcyWWQbVC-F4HXClAXJ9kQ347pwEPGx5S_9DRdc2nZv70zFF9LcHn87-U1">                        <div style="padding: 10px 0;">
+								<form action="page/contact" method="post"><input name="__RequestVerificationToken" type="hidden" value="LqgBfKVBe4KPRiP4dXbIv5DHmd4mRWjgaeCcyWWQbVC-F4HXClAXJ9kQ347pwEPGx5S_9DRdc2nZv70zFF9LcHn87-U1">                        <div style="padding: 10px 0;">
 									
 									<?php
 									if (isset($viewData["Success"]))

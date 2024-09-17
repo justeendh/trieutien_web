@@ -45,7 +45,7 @@
 								{
 							?>
 							<li>
-								<a href="detail-article/<?php echo $moduleID; ?>/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>.html"
+								<a href="detail-article/<?php echo $moduleID; ?>/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>"
 								 title="<?php echo $row->NAME_AR; ?>">
 									<?php echo $row->NAME_AR; ?>
 								</a>
@@ -53,7 +53,7 @@
 							<?php } ?>
 							<?php if($moduleID == "gioithieu") { ?>
 								<li>
-									<a href="articles-detail-image-flb/ho-so-nang-luc.html"
+									<a href="articles-detail-image-flb/ho-so-nang-luc"
 									 title="<?php echo $language_dict['companyProfile'] ?>">
 									 	<?php echo $language_dict['companyProfile'] ?>
 									</a>
@@ -78,14 +78,14 @@
 								?>
 								<li>
 									<div class="pull-left text-center" style="height: 50px; width: 50px; overflow-x: hidden; display: inline-block; margin-right: 10px;">
-										<a href="detail-project/du-an/<?php echo friendlyName($row->NAME_PRJ); ?>-viewpost-<?php echo $row->ID_PRJ; ?>.html" 
+										<a href="detail-project/du-an/<?php echo friendlyName($row->NAME_PRJ); ?>-viewpost-<?php echo $row->ID_PRJ; ?>" 
 										title="<?php echo $row->NAME_PRJ; ?>">
 											<img src="<?php echo $row->IMAGE_PRJ; ?>" alt="<?php echo $row->NAME_PRJ ?>" style="height: 100%;" />
 										</a>
 
 									</div>
 									<strong class="text-justify" style="padding-top: 3px; font-size: 14px;">
-										<a href="detail-project/du-an/<?php echo friendlyName($row->NAME_PRJ); ?>-viewpost-<?php echo $row->ID_PRJ; ?>.html"
+										<a href="detail-project/du-an/<?php echo friendlyName($row->NAME_PRJ); ?>-viewpost-<?php echo $row->ID_PRJ; ?>"
 										 title="<?php echo $row->NAME_PRJ; ?>">
 											<span class="limmit-line" data-original="<?php echo $row->NAME_PRJ; ?>" data-limit="2">
 												<?php echo $row->NAME_PRJ; ?>
@@ -117,14 +117,14 @@
 								?>
 								<li>
 									<div class="pull-left text-center" style="height: 50px; width: 50px; overflow-x: hidden; display: inline-block; margin-right: 10px;">
-										<a href="detail-article/tin-tuc/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>.html" 
+										<a href="detail-article/tin-tuc/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>" 
 										title="<?php echo $row->NAME_AR; ?>">
 											<img src="<?php echo $row->IMAGE_AR; ?>" alt="<?php echo $row->NAME_AR ?>" style="height: 100%;">
 										</a>
 
 									</div>
 									<strong class="text-justify" style="padding-top: 3px; font-size: 14px;">
-										<a href="detail-article/tin-tuc/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>.html"
+										<a href="detail-article/tin-tuc/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>"
 										 title="<?php echo $row->NAME_AR; ?>">
 											<span class="limmit-line" data-original="<?php echo $row->NAME_AR; ?>" data-limit="2">
 												<?php echo $row->NAME_AR; ?>

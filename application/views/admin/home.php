@@ -81,7 +81,7 @@
 						var visible = $(this).prop("checked");
 						$.ajax({
 							method: "POST",
-							url: "admin/manage/toogleenablesite-module-site.html", data: { "visible": visible }, success: function (result) {
+							url: "admin/manage/toogleenablesite-module-site", data: { "visible": visible }, success: function (result) {
 								if (result.success) {
 									$.bootstrapGrowl('<h4>SUCCESS!</h4> <p>Thao tác thực hiện thành công</p>', {
 										type: "success",
@@ -242,7 +242,7 @@
 	function getPathFromUrl() {
 	  return window.location.href.split(/[?#]/)[0];
 	}
-	window.history.pushState("", "Administrators Trieu Tien Portal", "admin.html");
+	window.history.pushState("", "Administrators Trieu Tien Portal", "admin");
 
 	
 </script>
@@ -409,7 +409,7 @@
 	var pushDataLogs = function(){
 		$.ajax({
 			method: "POST",
-			url: "admin/manage/getlogsupdated-module-admin.html", success: function (result) {
+			url: "admin/manage/getlogsupdated-module-admin", success: function (result) {
 				var resultData = JSON.parse(result);
 				$("#txtVisitorCount").text($.number( parseInt(resultData.countvisitor), 0, ',', ' ' ));
 				var point = visitorChart.get(resultData.counterdate.date);

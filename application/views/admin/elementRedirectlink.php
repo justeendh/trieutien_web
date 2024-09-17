@@ -12,7 +12,7 @@
 		</div>
     </div>
     <div class="widget-extra" style="height: auto !important;">      
-		<?php echo form_open_multipart('admin/manage/do_upload_file-module-hosonangluc_download.html');?>  
+		<?php echo form_open_multipart('admin/manage/do_upload_file-module-hosonangluc_download');?>  
 			<div style="padding: 1em;">
 				<h3><strong>Nhập liên kết</strong></h3>
 				<div class="form-group">
