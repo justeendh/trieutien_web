@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$config['base_url'] = '/';
+$config['base_url'] = '/trieutien/';
 
 $config['uri_protocol']	= 'REQUEST_URI';
 
@@ -44,7 +44,7 @@ $config['cache_query_string'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
-| Encryption Key
+| Encryption Key 
 |--------------------------------------------------------------------------
 |
 | If you use the Encryption class, you must set an encryption key.
