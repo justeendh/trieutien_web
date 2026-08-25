@@ -91,7 +91,7 @@
 				<div class="list-news-block owl-public-carousel">
 					<?php  foreach ($queryProjects->result() as $rowPrj) { ?>
 					<div class="construc-item">
-						<a class="image-link" href="detail-project/du-an/<?php echo friendlyName($rowPrj->NAME_PRJ); ?>-viewpost-<?php echo $rowPrj->ID_PRJ ?>.html"
+						<a class="image-link" href="detail-project/du-an/<?php echo friendlyName($rowPrj->NAME_PRJ); ?>-viewpost-<?php echo $rowPrj->ID_PRJ ?>"
 							title="<?php echo $rowPrj->NAME_PRJ ?>">
 							<img class="img-c-two2" src="thumbnail/img?imageurl=<?php echo default_value($rowPrj->IMAGE_PRJ, 'img/no-image.jpg'); ?>&width=500" alt="<?php echo $rowPrj->NAME_PRJ ?>">
 							<div class="fdw-background2">
@@ -99,10 +99,10 @@
 							</div>
 						</a>				
 						<div class="project-info-wrap">
-							<a href="detail-project/du-an/<?php echo friendlyName($rowPrj->NAME_PRJ); ?>-viewpost-<?php echo $rowPrj->ID_PRJ ?>.html"
+							<a href="detail-project/du-an/<?php echo friendlyName($rowPrj->NAME_PRJ); ?>-viewpost-<?php echo $rowPrj->ID_PRJ ?>"
 								title="<?php echo $rowPrj->NAME_PRJ ?>">
 								<h4 class="text-primary-font project-name">
-									<?php echo $rowPrj->NAME_PRJ ?>
+									<?php echo $rowPrj->NAME_PRJ;  ?> 
 								</h4>
 							</a>
 							<div class="mota_project">
@@ -136,7 +136,7 @@
                 		<?php echo $infomations['homeintro']; ?>
 				</div>
 				<div class="text-left">
-					<a href="articles-list-articles/gioi-thieu.html" class="btn btn-danger">
+					<a href="articles-list-articles/gioi-thieu" class="btn btn-danger">
 						<i class="fa fa-hand-o-right"></i> &nbsp;&nbsp;<?php echo $language_dict['viewMore'] ?>
 					</a>
 				</div>
@@ -163,12 +163,12 @@
 						<div class="col-md-3 col-xs-12 col-sm-6 newspaper-item-ctn">
 							<div class="articles-news-ctn">
 								<div class="img">
-									<a href="detail-article/tin-tuc/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>.html">
+									<a href="detail-article/tin-tuc/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>">
 										<img src="<?php echo $row->IMAGE_AR; ?>" alt="<?php echo $row->NAME_AR; ?>" />
 									</a>
 								</div>
 								<div class="title text-primary-font">
-									<a href="detail-article/tin-tuc/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>.html">
+									<a href="detail-article/tin-tuc/<?php echo friendlyName($row->NAME_AR); ?>-viewpost-<?php echo $row->ID_AR; ?>">
 										<h4><?php echo $row->NAME_AR; ?></h4>
 									</a>
 								</div>
@@ -181,7 +181,7 @@
 				</div>
 			</div>
 			<div class="text-center">
-				<a href="articles-list-articles/tin-tuc.html" class="btn btn-danger btn-lg">
+				<a href="articles-list-articles/tin-tuc" class="btn btn-danger btn-lg">
 					<i class="fa fa-newspaper-o"></i> &nbsp;&nbsp;<?php echo $language_dict['proNewsOther'] ?>
 				</a>
 			</div>

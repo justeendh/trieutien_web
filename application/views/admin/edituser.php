@@ -1,5 +1,5 @@
 
-<form action="admin/manage/saveuser-module-user.html" method="post" accept-charset="utf-8">
+<form action="admin/manage/saveuser-module-user" method="post" accept-charset="utf-8">
 	<div class="row">
 		<div class="col-lg-12">
 			<!-- Timeline Widget -->
@@ -104,6 +104,6 @@
 		]
 	}); */
 	<?php if($viewData['ACTION_EDIT'] == "false"){ ?>
-	window.history.pushState("", "Administrators Trieu Tien Portal", "admin/manage/adduser-module-user.html");
+	window.history.pushState("", "Administrators Trieu Tien Portal", "admin/manage/adduser-module-user");
 	<?php } ?>
 </script>

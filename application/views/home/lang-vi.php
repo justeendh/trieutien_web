@@ -31,7 +31,7 @@
 
         'investor' => 'Chủ đầu tư',
         'constructionSite' => 'Địa điểm thi công',
-        'constructionTime' => 'Thời gian thin công',
+        'constructionTime' => 'Thời gian thi công',
 
         'contactSuccess' => 'Yêu cầu của bạn đã được gửi thành công !',
         'contactError' => 'Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng tôi. Xin cảm ơn',

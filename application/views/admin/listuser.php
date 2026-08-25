@@ -7,7 +7,7 @@
         </h3>
         <div class="widget-options">
 			<div class="btn-group">
-				<a href="admin/manage/adduser-module-user.html" class="btn btn-default">
+				<a href="admin/manage/adduser-module-user" class="btn btn-default">
 					<i class="fa fa-plus"></i> Thêm mới
 				</a>
 			</div>
@@ -16,7 +16,7 @@
     <div class="widget-extra" style="height: auto !important;">
         
         <div style="padding: 0 0;">
-            <form action="admin/manage/listuser-module-user.html" accept-charset="UTF-8" method="get" >
+            <form action="admin/manage/listuser-module-user" accept-charset="UTF-8" method="get" >
             
 				<table class="table table-borderless middle-verticle" style="margin-bottom: 0; margin-top: 0;">
 					<tr>
@@ -28,7 +28,7 @@
 									<button type="submit" class="btn btn-warning btn-lg">
 										<i class="fa fa-search"></i><span class="hidden-xs hidden-sm" style="display: inline !important;">&nbsp;&nbsp;Tìm kiếm</span>
 									</button>
-									<a href="admin/manage/listuser-module-user.html" class="btn btn-primary btn-lg">
+									<a href="admin/manage/listuser-module-user" class="btn btn-primary btn-lg">
 										<i class="fa fa-refresh"></i><span class="hidden-xs hidden-sm" style="display: inline !important;">&nbsp;&nbsp;Làm mới</span>
 									</a>
 								</div>
@@ -78,11 +78,11 @@
 										<div class="divcellsize"></div>
 									</td>
 									<td class="text-nowrap">
-										<a href="admin/manage/modifyuser-module-user.html?id=<?php echo $row->USERNAME; ?>" class="btn btn-info">
+										<a href="admin/manage/modifyuser-module-user?id=<?php echo $row->USERNAME; ?>" class="btn btn-info">
 											<i class="fa fa-pencil"></i>
 										</a>
 										<?php if ($row->IS_ADMIN != 1){ ?>
-										<a href="admin/manage/deleteuser-module-user.html?id=<?php echo $row->USERNAME; ?>" 
+										<a href="admin/manage/deleteuser-module-user?id=<?php echo $row->USERNAME; ?>" 
 										  onClick="return confirm('Xác nhận xoá bản ghi này ?');"
 										  class="btn btn-danger">
 											<i class="gi gi-bin"></i>
@@ -97,7 +97,7 @@
                 
 				<div class="text-center">
 					<?php 
-						$config['base_url'] = 'admin/manage/listuser-module-user.html';
+						$config['base_url'] = 'admin/manage/listuser-module-user';
 						$config['total_rows'] = (int)$viewData['TOTAL_REC'];
 						$config['per_page'] = 20;
 						$config['full_tag_open'] = "<div class='pagination pagination-lg'>";

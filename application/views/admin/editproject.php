@@ -1,5 +1,5 @@
 
-<form action="admin/manage/saveproject-module-<?php echo $contentModel->ID_MODULE; ?>.html" method="post" accept-charset="utf-8">
+<form action="admin/manage/saveproject-module-<?php echo $contentModel->ID_MODULE; ?>" method="post" accept-charset="utf-8">
 	<div class="row">
 		<div class="col-lg-12">
 			<!-- Timeline Widget -->
@@ -14,7 +14,7 @@
 					</h3>
 					<div class="widget-options">
 						<?php if($viewData['ACTION_EDIT'] == "true") { ?>
-							<a href="admin/manage/addproject-module-<?php echo $contentModel->ID_MODULE; ?>.html" class="btn btn-default">
+							<a href="admin/manage/addproject-module-<?php echo $contentModel->ID_MODULE; ?>" class="btn btn-default">
 								<i class="fa fa-plus"></i> Thêm mới
 							</a>&nbsp;&nbsp;&nbsp;&nbsp;
 						<?php } ?>
@@ -95,6 +95,7 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label for="NAME_PRJ">Tên sản phẩm/dự án</label>
+												<input type="hidden" name="langQuery" value="<?php echo $langQuery; ?>"/>
 												<input type="hidden" name="ACTION_EDIT" value="<?php echo $viewData['ACTION_EDIT']; ?>"/>
 												<input type="hidden" name="ID_PRJ" value="<?php echo $contentModel->ID_PRJ; ?>" />
 												<input type="hidden" name="IMAGE_PRJ" value="<?php echo $contentModel->IMAGE_PRJ; ?>" />
@@ -244,7 +245,7 @@
 										<div class="btn-group btn-group-sm">
 											<a href="<?php echo $rowImageDetail->IMAGE_URL; ?>"
 											 class="gallery-link btn btn-sm btn-success" title="<?php echo $contentModel->NAME_PRJ; ?>">Xem hình</a>
-											<a href="admin/manage/deleteimageprjdetail-module-<?php echo $moduleID; ?>.html?id=<?php echo $rowImageDetail->ID; ?>&refid=<?php echo $contentModel->ID_PRJ; ?>" 
+											<a href="admin/manage/deleteimageprjdetail-module-<?php echo $moduleID; ?>?id=<?php echo $rowImageDetail->ID; ?>&refid=<?php echo $contentModel->ID_PRJ; ?>" 
 												  onClick="return confirm('Xác nhận xoá bản ghi này ?');" class="btn btn-sm btn-danger">
 												<i class="fa fa-times"></i>
 											</a>
@@ -268,12 +269,12 @@
 <script>
 	$("div#myAwesomeADropzone").dropzone(
 	{ 
-		url: "admin/manage/dropzoneupload-module-<?php echo $contentModel->ID_MODULE; ?>.html?id=<?php echo $contentModel->ID_PRJ; ?>",
+		url: "admin/manage/dropzoneupload-module-<?php echo $contentModel->ID_MODULE; ?>?id=<?php echo $contentModel->ID_PRJ; ?>",
 		addRemoveLinks: false,
 		acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
 		maxFilesize: 2,
 		queuecomplete : function(){
-			window.location = "admin/manage/modifyproject-module-<?php echo $contentModel->ID_MODULE; ?>.html?id=<?php echo $contentModel->ID_PRJ; ?>";
+			window.location = "admin/manage/modifyproject-module-<?php echo $contentModel->ID_MODULE; ?>?id=<?php echo $contentModel->ID_PRJ; ?>";
 		}
 	});
 	
@@ -285,7 +286,7 @@
 		]
 	});
 	<?php if($viewData['ACTION_EDIT'] == "false"){ ?>
-	window.history.pushState("", "Administrators Trieu Tien Portal", "admin/manage/addproject-module-<?php echo $contentModel->ID_MODULE; ?>.html");
+	window.history.pushState("", "Administrators Trieu Tien Portal", "admin/manage/addproject-module-<?php echo $contentModel->ID_MODULE; ?>");
 	<?php } ?>
 </script>
 

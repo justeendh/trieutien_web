@@ -36,7 +36,7 @@
 					<div class="row">
 						<?php  foreach ($queryImageActivity->result() as $row) { ?>
 						<div class="col-md-4 col-xs-12 col-sm-6 project-item-ctn">
-							<a href="images-detail-image/<?php echo $moduleID; ?>-viewdetail-<?php echo $row->ID ?>.html"
+							<a href="images-detail-image/<?php echo $moduleID; ?>-viewdetail-<?php echo $row->ID ?>"
 							 title="<?php echo $row->NAME_IMG ?>" class="pos-relative">
 								<div class="imgsamesize-article">
 									<img src="thumbnail/img?imageurl=<?php echo default_value($row->IMAGE_URL, 'img/no-image.jpg'); ?>&width=500" alt="<?php echo $row->NAME_IMG ?>">
@@ -54,7 +54,7 @@
 				</div>
 				<div class="text-center">
 					<?php 
-						$config['base_url'] = 'articles-list-images/'.$moduleID.'.html';
+						$config['base_url'] = 'articles-list-images/'.$moduleID.'';
 						$config['total_rows'] = $viewData["TOTAL_REC"];
 						$config['per_page'] = 10;
 						$config['full_tag_open'] = "<div class='pagination pagination-lg'>";

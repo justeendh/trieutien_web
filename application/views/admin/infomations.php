@@ -1,5 +1,5 @@
 
-<form action="admin/manage/saveinfomations-module-info.html" method="post">
+<form action="admin/manage/saveinfomations-module-info" method="post">
     <div class="row">
         <div class="col-sm-12">
             <!-- Timeline Widget -->
@@ -84,6 +84,57 @@
 										</script>
 									 <?php
 								}
+								else if ($itemInfo->TYPE_INFO == 4 && $itemInfo->VISIBLE_EDIT == 1){
+									?>
+
+										<div style="padding: 1em 0;">
+											<h3><strong>Nhập liên kết <?php echo $itemInfo->NAME_INFO; ?></strong></h3>
+											<div class="form-group">
+												<div class="input-group">
+													<div class="input-group-addon">&nbsp;&nbsp;<i class="fa fa-link"></i>&nbsp;&nbsp;</div>
+													<input class="form-control" id="<?php echo $itemInfo->KEY_INFO; ?>" placeholder="https://link-to-file/download"
+														style="font-size: 18px;" name="<?php echo $itemInfo->KEY_INFO; ?>" value="<?php echo $itemInfo->VAL_INFO; ?>"/>
+													<div class="input-group-btn">
+														<button type="button" class="btn btn-lg btn-primary" id="<?php echo $itemInfo->KEY_INFO; ?>Input"
+															style="padding: 1rem 3rem !important;">
+															<i class="fa fa-link"></i> Browse
+														</button>
+													</div>
+												</div>	
+											</div>	 
+										</div>
+
+										<script>
+											function selectFileWithCKFinder( elementId ) {
+												CKFinder.popup( {
+													chooseFiles: true,
+													width: 800,
+													height: 600,
+													onInit: function( finder ) {
+														finder.on( 'files:choose', function( evt ) {
+															var file = evt.data.files.first();
+															var output = document.getElementById( elementId );
+															output.value = file.getUrl();
+														} );
+
+														finder.on( 'file:choose:resizedImage', function( evt ) {
+															var output = document.getElementById( elementId );
+															output.value = evt.data.resizedUrl;
+														} );
+													}
+												} );
+											}
+											$(function(){
+
+												$('#<?php echo $itemInfo->KEY_INFO; ?>Input').click(() =>{
+													selectFileWithCKFinder( '<?php echo $itemInfo->KEY_INFO; ?>' );
+												});
+											});
+										</script>
+									<?php
+
+									
+								}
 								else{
 									if($itemInfo->VISIBLE_EDIT == 1){
 									 ?>
@@ -126,5 +177,5 @@
 
 
 <script>
-	window.history.pushState("", "Cập nhật thông tin chung", 'admin/manage/infomations-module-info.html');
+	window.history.pushState("", "Cập nhật thông tin chung", 'admin/manage/infomations-module-info');
 </script>

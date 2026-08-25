@@ -4,7 +4,7 @@
         'cmsTrieuTien' => 'TRIEU TIEN CMS',
         'userManager' => 'User manager',
         'generalInfo' => 'General info',
-        'contact' => 'General info',
+        'contact' => 'Contact info',
         'accessCount' => 'Access count',
         'helloAdmin' => 'Hello',
         'chart30day' => 'Traffic chart for the last 30 days',

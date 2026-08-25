@@ -16,6 +16,7 @@
 		public $USER_CREATED;
 		public $DATE_MODIFIED;
 		public $USER_MODIFIED;
+		public $LANGUAGE;
 		
 		public function loadfromquery($queryData){
 			$this->ID_PRJ = $queryData->ID_PRJ;
@@ -49,6 +50,7 @@
 			$this->HOST_PRJ = $_POST['HOST_PRJ'];
 			$this->LOCATION_PRJ = $_POST['LOCATION_PRJ'];
 			$this->YEAR_PRJ = isset($_POST['YEAR_PRJ']) ? $_POST['YEAR_PRJ'] : "";
+			$this->LANGUAGE = $_POST['langQuery'];
 			
 			if(!isset($_POST['VISIBLE_PRJ'])) $this->VISIBLE_PRJ = "0";
 			else $this->VISIBLE_PRJ = $_POST['VISIBLE_PRJ'];
@@ -67,6 +69,7 @@
 			$this->LOCATION_PRJ = $_POST['LOCATION_PRJ'];
 			$this->YEAR_PRJ = isset($_POST['YEAR_PRJ']) ? $_POST['YEAR_PRJ'] : "";
 			$this->DATE_CREATED = date('Y-m-d H:i:s');
+			$this->LANGUAGE = $_POST['langQuery'];
 			
 			if(!isset($_POST['VISIBLE_PRJ'])) $this->VISIBLE_PRJ = "0";
 			else $this->VISIBLE_PRJ = $_POST['VISIBLE_PRJ'];

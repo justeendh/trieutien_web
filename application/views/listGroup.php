@@ -79,7 +79,7 @@ if (isset($ListGroupModel) && count($ListGroupModel) > 0)
 			var visible = $(this).prop("checked");
 			$.ajax({
 				method: "POST",
-				url: "admin/manage/tooglevisiblegroup-module-<?php echo $moduleListGroup; ?>.html", data: { "groupId": id, "visible": visible }, success: function (result) {
+				url: "admin/manage/tooglevisiblegroup-module-<?php echo $moduleListGroup; ?>", data: { "groupId": id, "visible": visible }, success: function (result) {
 					if (result.success) {
 						$.bootstrapGrowl('<h4>SUCCESS!</h4> <p>Thao tác thực hiện thành công</p>', {
 							type: "success",
@@ -133,7 +133,7 @@ if (isset($ListGroupModel) && count($ListGroupModel) > 0)
                             "items": data
                         },
                         type: 'POST',
-                        url: 'admin/manage/sortgroup-module-<?php echo $moduleListGroup; ?>.html',
+                        url: 'admin/manage/sortgroup-module-<?php echo $moduleListGroup; ?>',
                         success: function (response) {
                             if (!response.success) {
                                 $('#sortable-<?php echo $moduleListGroup; ?>').sortable("cancel");

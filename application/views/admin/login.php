@@ -77,7 +77,7 @@
                 <!-- Login Form -->
                 
 
-                <form action="admin/manage/loginuser-module-user.html" 
+                <form action="admin/manage/loginuser-module-user" 
                       method="post" id="form-login" class="form-horizontal form-bordered form-control-borderless">
                     <?php if (isset($viewData["Failed"])) { ?>
 						<div class="container-fluid" style="margin-bottom: 0; margin-top: 10px; padding-left: 20px; padding-right: 20px;">
@@ -295,7 +295,7 @@
 			function getPathFromUrl() {
 			  return window.location.href.split(/[?#]/)[0];
 			}
-			window.history.pushState("", "Triều Tiến Administrator login", "admin/manage/login-module-user.html");
+			window.history.pushState("", "Triều Tiến Administrator login", "admin/manage/login-module-user");
 			
 
 		</script>

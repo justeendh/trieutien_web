@@ -1,5 +1,5 @@
 
-<form action="admin/manage/saveimage-module-<?php echo $contentModel->ID_MODULE; ?>.html" method="post" accept-charset="utf-8">
+<form action="admin/manage/saveimage-module-<?php echo $contentModel->ID_MODULE; ?>" method="post" accept-charset="utf-8">
 	<div class="row">
 		<div class="col-lg-12">
 			<!-- Timeline Widget -->
@@ -10,11 +10,12 @@
 						<?php 
 							echo ($viewData['ACTION_EDIT']) ? 'CHỈNH SỬA ' : 'THÊM MỚI '; 
 							echo $moduleName; 
+							echo $moduleType;
 						?></strong>
 					</h3>
 					<div class="widget-options">
 						<?php if($viewData['ACTION_EDIT'] == "true") { ?>
-							<a href="admin/manage/addimage-module-<?php echo $contentModel->ID_MODULE; ?>.html" class="btn btn-default">
+							<a href="admin/manage/addimage-module-<?php echo $contentModel->ID_MODULE; ?>" class="btn btn-default">
 								<i class="fa fa-plus"></i> Thêm mới
 							</a>&nbsp;&nbsp;&nbsp;&nbsp;
 						<?php } ?>
@@ -90,6 +91,7 @@
 										<div class="col-sm-12">
 											<div class="form-group">
 												<label for="NAME_IMG">Tên đối tượng</label>
+												<input type="hidden" name="langQuery" value="<?php echo $langQuery; ?>"/>
 												<input type="hidden" name="ACTION_EDIT" value="<?php echo $viewData['ACTION_EDIT']; ?>"/>
 												<input type="hidden" name="ID" value="<?php echo $contentModel->ID; ?>" />
 												<input type="hidden" name="IMAGE_URL" value="<?php echo $contentModel->IMAGE_URL; ?>" />
@@ -172,7 +174,7 @@
 </form>
 
 
-<?php if($moduleType == 3 && $viewData['ACTION_EDIT'] == "true") { ?>
+<?php  if($moduleType == 3 && $viewData['ACTION_EDIT'] == "true") { ?>
 <div>
 	<!-- Timeline Widget -->
 	<div class="widget">
@@ -210,7 +212,7 @@
 										<div class="btn-group btn-group-sm">
 											<a href="<?php echo $rowImageDetail->IMAGE_URL; ?>"
 											 class="gallery-link btn btn-sm btn-success" title="<?php echo $contentModel->NAME_IMG; ?>">Xem hình</a>
-											<a href="admin/manage/deleteimagedetail-module-<?php echo $moduleID; ?>.html?id=<?php echo $rowImageDetail->ID; ?>&refid=<?php echo $contentModel->ID; ?>" 
+											<a href="admin/manage/deleteimagedetail-module-<?php echo $moduleID; ?>?id=<?php echo $rowImageDetail->ID; ?>&refid=<?php echo $contentModel->ID; ?>" 
 												  onClick="return confirm('Xác nhận xoá bản ghi này ?');" class="btn btn-sm btn-danger">
 												<i class="fa fa-times"></i>
 											</a>
@@ -234,12 +236,12 @@
 <script>
 	$("div#myAwesomeADropzone").dropzone(
 	{ 
-		url: "admin/manage/dropzoneupload-module-<?php echo $contentModel->ID_MODULE; ?>.html?id=<?php echo $contentModel->ID; ?>",
+		url: "admin/manage/dropzoneupload-module-<?php echo $contentModel->ID_MODULE; ?>?id=<?php echo $contentModel->ID; ?>",
 		addRemoveLinks: false,
 		acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
 		maxFilesize: 2,
 		queuecomplete : function(){
-			window.location = "admin/manage/modifyimage-module-<?php echo $contentModel->ID_MODULE; ?>.html?id=<?php echo $contentModel->ID; ?>";
+			window.location = "admin/manage/modifyimage-module-<?php echo $contentModel->ID_MODULE; ?>?id=<?php echo $contentModel->ID; ?>";
 		}
 	});
 	
@@ -247,7 +249,7 @@
 	
 	
 	<?php if($viewData['ACTION_EDIT'] == "false"){ ?>
-		window.history.pushState("", "Administrators Trieu Tien Portal", "admin/manage/addimage-module-<?php echo $contentModel->ID_MODULE; ?>.html");
+		window.history.pushState("", "Administrators Trieu Tien Portal", "admin/manage/addimage-module-<?php echo $contentModel->ID_MODULE; ?>");
 	<?php } ?>
 </script>
 
