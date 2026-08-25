@@ -1,0 +1,27 @@
+version: '3'
+networks:
+  trieutien_network:
+    driver: bridge
+services:
+  trieutien_db:
+    container_name: trieutien_db
+    image: mariadb:10.3
+    networks:
+      - trieutien_network
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: JusteenDH205.123
+  phpfpm:
+    container_name: trieutien_web
+    image: nanoninja/php-fpm
+    networks:
+      - trieutien_network
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/var/www/html
+    command: php -S="0.0.0.0:3000" -t="/var/www/html"
+    links:
+      - trieutien_db
